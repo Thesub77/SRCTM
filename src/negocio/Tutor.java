@@ -76,13 +76,15 @@ public class Tutor extends Empleado {
             InstantiationException,
             IllegalAccessException,
             SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DB_Tutor bdT = new DB_Tutor ();
+      return (Persona) bdT.buscarTutor(inss);
     }
 
     // Metodo para eliminar un registro de Tutor
     @Override
     public boolean borrarRegistro(String inss) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DB_Tutor bdT = new DB_Tutor ();               
+        return bdT.borrar(inss);
     }
 
 }

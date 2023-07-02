@@ -8,6 +8,7 @@ import controlador.CtrlTutor;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
+//import negocio.Tutor;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -163,7 +164,7 @@ public class Tutor extends javax.swing.JInternalFrame {
         jBtnEliminarTutor.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarTutor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarTutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarTutor.setText("Eliminar");
+        jBtnEliminarTutor.setText("Anular");
         jBtnEliminarTutor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarTutorMouseEntered(evt);
@@ -189,7 +190,7 @@ public class Tutor extends javax.swing.JInternalFrame {
                 .addComponent(jBtnBuscarTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBtnEliminarTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +272,6 @@ public class Tutor extends javax.swing.JInternalFrame {
         jTblListarTutor.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarTutor.setRowHeight(25);
         jTblListarTutor.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarTutor.setShowHorizontalLines(true);
         jTblListarTutor.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarTutor);
 
@@ -321,18 +321,24 @@ public class Tutor extends javax.swing.JInternalFrame {
 
     private void jBtnGuardarTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarTutorActionPerformed
         try {
-            // Preparar los datos que se guardaran del tecnico:
-            int ans = CtrlTutor.insertar_tutor(
-                    this.jTxtINSSTutor.getText(),
-                    this.jTxtNombresTutor.getText().toUpperCase(),
-                    this.jTxtApellido1Tutor.getText().toUpperCase(),
-                    this.jTxtApellido2Tutor.getText().toUpperCase()
-            );
-            if (ans > 0) {
-                JOptionPane.showMessageDialog(this, "Registro grabado con exito",
-                        "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
-                this.clearForm(); //Limpiar los campos del formulario
-            }//Fin de la instrucción if
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Preparar los datos que se guardaran del Tutor
+                int ans = CtrlTutor.insertar_tutor(
+                        this.jTxtINSSTutor.getText(),
+                        this.jTxtNombresTutor.getText().toUpperCase(),
+                        this.jTxtApellido1Tutor.getText().toUpperCase(),
+                        this.jTxtApellido2Tutor.getText().toUpperCase());
+
+                // Validamos si se guardo el registro
+                if (ans > 0) {
+                    JOptionPane.showMessageDialog(this, "Registro grabado con exito",
+                            "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
+                    this.clearForm(); //Limpiar los campos del formulario
+                }//Fin de la instrucción if
+            }
+
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Error al intentar guardar "
                     + "el \n registro, no se encuentra una librería",
@@ -350,24 +356,55 @@ public class Tutor extends javax.swing.JInternalFrame {
                     + "el manejo de la solicitud \n al intentar registrar datos "
                     + "\n" + ex.getMessage(),
                     "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
         }//Fin de instrucción catch
     }//GEN-LAST:event_jBtnGuardarTutorActionPerformed
 
     private void jBtnBuscarTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarTutorActionPerformed
-        /*try {
-            // Preparar los datos que se guardaran del tecnico:
-            //ResultSet rst = Ctr_Tutor.buscar(this.jTxtINSS.getText());
-            String inss = this.jTxtINSS.getText();
-            String sql = "SELECT * FROM Tutor";
-            cnx.
-            
-            if (rst > 0) {
-                JOptionPane.showMessageDialog(this, "Registro grabado con exito"
-                        , "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
-            }//Fin de la instrucción if
-        } catch(Exception ex){
-            
-        }*/
+        try {
+            // Validamos que el campo INSS sea rellenado
+            // Ya que es el insumo para realizar la busqueda de un Tutor en la Base de datos
+            if (jTxtINSSTutor.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Realizar el filtrado de un registro indicado por inns:            
+                String value = this.jTxtINSSTutor.getText();
+                negocio.Tutor tut = CtrlTutor.leerRegistro(value);
+                //Si se obtuvo el registro, se muestra
+                if (tut != null) {
+                    this.jTxtNombresTutor.setText(tut.getNombre());
+                    this.jTxtApellido1Tutor.setText(tut.getP_apellido());
+                    this.jTxtApellido2Tutor.setText(tut.getS_apellido());
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado "
+                            + "el \n registro, revise los datos e intente nuevamente",
+                            "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n en recurso de Base de Datos"
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        } // Fin
     }//GEN-LAST:event_jBtnBuscarTutorActionPerformed
 
     private void jTxtNombresTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombresTutorActionPerformed
@@ -413,6 +450,66 @@ public class Tutor extends javax.swing.JInternalFrame {
 
     private void jBtnEliminarTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarTutorActionPerformed
         // TODO add your handling code here:
+        int opc; //Determina el boton seleccionado en el mensaje de confirmación        
+        try {
+            if (jTxtINSSTutor.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese el INSS "
+                        + "del registro que desea anular", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                negocio.Tutor t = CtrlTutor.leerRegistro(this.jTxtINSSTutor.getText());
+
+                if (t != null) {
+                    opc = JOptionPane.showConfirmDialog(this, "Esta intentando eliminar"
+                            + " un registro que contiene más \n"
+                            + " vinculaciones con otros datos"
+                            + " ¿Esta seguro de continuar?",
+                            "Eliminar", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE);
+                    if (opc == JOptionPane.YES_OPTION) {
+                        // Enviamos el INSS al controlador para realizar la anulacion del registro
+                        CtrlTutor.eliminar(this.jTxtINSSTutor.getText());
+
+                        // Mostramos un mensaje que confirma la anulacion del registro
+                        JOptionPane.showMessageDialog(this, "El registro del Tutor:"
+                                + this.jTxtINSSTutor.getText()
+                                + "\n ha sido removido", "Eliminar",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        // Limpiamos los campos del formulario
+                        this.clearForm();
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
+                            + "\n Numero de INSS: "
+                            + this.jTxtINSSTutor.getText()
+                            + " \n Asegurese de haberlo escrito correctamente",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    this.clearForm();
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnEliminarTutorActionPerformed
 
     private void jBtnEliminarTutorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarTutorMouseEntered
@@ -430,6 +527,21 @@ public class Tutor extends javax.swing.JInternalFrame {
         this.jTxtApellido1Tutor.setText("");
         this.jTxtApellido2Tutor.setText("");
     }// Fin
+
+    // Metodo para validar que los campos del formulario sean rellenados
+    private boolean validateForm() {
+        boolean t = true;
+
+        if (jTxtINSSTutor.getText().isBlank()
+                || jTxtNombresTutor.getText().isBlank()
+                || jTxtApellido1Tutor.getText().isBlank()) {
+
+            // Si alguno de los campos esta vacio retorna falso
+            t = false;
+        }
+
+        return t;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarTutor;

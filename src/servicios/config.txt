@@ -3,6 +3,6 @@ jdbc=jdbc:sqlserver://
 driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
 databasehost=DESKTOP-F7S5PDA\\SQLEXPRESS
 port = 1433
-database=SRCTM
+database=SrctmDB
 username=sqlUser
 password = SqlUser2023
