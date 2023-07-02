@@ -103,8 +103,8 @@ public class DB_Tutor {
        cnx = new MS_SQLServer ();
        //Establecer la Sentencia SQL de consulta en la base de datos
        // sql = "EXECUTE verificar_Tutor ?"
-       String sql = "SELECT codigo_inss FROM personal_operativo "; // Pendiente aniadir el stored procedure
-                                                                      sql += "WHERE \"codigo_inss\" = ?";
+       String sql = "EXECUTE verificar_tutor ?";//"SELECT codigo_inss FROM personal_operativo "; // Pendiente aniadir el stored procedure
+       //sql += "WHERE \"codigo_inss\" = ?";
        
         cnx.pst = cnx.conexion.prepareStatement(sql);
         cnx.pst.setString(1, tut.getInss()); //Indicar el número de INSS
