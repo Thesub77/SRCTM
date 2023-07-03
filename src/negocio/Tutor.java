@@ -59,14 +59,15 @@ public class Tutor extends Empleado {
             InstantiationException,
             IllegalAccessException,
             SQLException {
-        
-        DB_Tutor tut_db = new DB_Tutor (this);
-        
+
+        DB_Tutor tut_db = new DB_Tutor(this);
+
         //Verificar si es una actualización o una nueva inserción
-        if (!tut_db.verificarTutor())
-           return tut_db.insertar(false);  //Se trata de una nueva inserción
-        else
-           return tut_db.insertar(true); //Se trata de una actualización   
+        if (!tut_db.verificarTutor()) {
+            return tut_db.insertar(false);  //Se trata de una nueva inserción
+        } else {
+            return tut_db.insertar(true); //Se trata de una actualización   
+        }
     }
 
     // Metodo para buscar un registro de Tutor
@@ -76,14 +77,20 @@ public class Tutor extends Empleado {
             InstantiationException,
             IllegalAccessException,
             SQLException {
-        DB_Tutor bdT = new DB_Tutor ();
-      return (Persona) bdT.buscarTutor(inss);
+
+        DB_Tutor bdT = new DB_Tutor();
+        return (Persona) bdT.buscarTutor(inss);
     }
 
     // Metodo para eliminar un registro de Tutor
     @Override
-    public boolean borrarRegistro(String inss) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        DB_Tutor bdT = new DB_Tutor ();               
+    public boolean borrarRegistro(String inss) throws
+            ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException {
+        
+        DB_Tutor bdT = new DB_Tutor();
         return bdT.borrar(inss);
     }
 
