@@ -71,7 +71,7 @@ public class Evaluador extends Empleado {
 
     // Metodo para buscar un registro de Evaluador
     @Override
-    public Persona leerRegistro(String value) throws
+    public Persona leerRegistro(String inss) throws
             ClassNotFoundException,
             InstantiationException,
             IllegalAccessException,
@@ -83,7 +83,7 @@ public class Evaluador extends Empleado {
 
     // Metodo para anular un registro de Evaluador
     @Override
-    public boolean borrarRegistro(String value) throws
+    public boolean borrarRegistro(String inss) throws
             ClassNotFoundException,
             InstantiationException,
             IllegalAccessException,
