@@ -4,7 +4,10 @@
  */
 package ui;
 
+import controlador.CtrlModalidadGraduacion;
 import java.awt.Color;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -111,7 +114,7 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jLabel3)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +148,6 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
         jTblListarMod.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarMod.setRowHeight(25);
         jTblListarMod.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarMod.setShowHorizontalLines(true);
         jTblListarMod.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarMod);
 
@@ -178,7 +180,7 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
         jBtnEliminarMod.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarMod.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarMod.setText("Eliminar");
+        jBtnEliminarMod.setText("Anular");
         jBtnEliminarMod.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarModMouseEntered(evt);
@@ -204,7 +206,7 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
                 .addComponent(jBtnBuscarMod, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBtnEliminarMod, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,24 +338,87 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTxtCodigoModActionPerformed
 
     private void jBtnBuscarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarModActionPerformed
-        /*try {
-            // Preparar los datos que se guardaran del tecnico:
-            //ResultSet rst = Ctr_Tutor.buscar(this.jTxtINSS.getText());
-            String inss = this.jTxtINSS.getText();
-            String sql = "SELECT * FROM Tutor";
-            cnx.
+        try {
+            // Validamos que el campo Codigo sea rellenado
+            // Ya que es el insumo para realizar la busqueda de una modalidad en la Base de datos
+            if (jTxtCodigoMod.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Realizar el filtrado de un registro indicado por el Codigo:            
+                String value = this.jTxtCodigoMod.getText();
+                negocio.ModalidadGraduacion mod = CtrlModalidadGraduacion.leerRegistro(value);
+                //Si se obtuvo el registro, se muestra
+                if (mod != null) {
+                    this.jTxtDescripcionMod.setText(mod.getDescripcion());
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado "
+                            + "el \n registro, revise los datos e intente nuevamente",
+                            "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
-            if (rst > 0) {
-                JOptionPane.showMessageDialog(this, "Registro grabado con exito"
-                    , "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
-            }//Fin de la instrucción if
-        } catch(Exception ex){
-
-        }*/
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n en recurso de Base de Datos"
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        } // Fin
     }//GEN-LAST:event_jBtnBuscarModActionPerformed
 
     private void jBtnGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarModActionPerformed
+        try {
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Preparar los datos que se guardaran de la Modalidad
+                int ans = CtrlModalidadGraduacion.insertar_modalidad(
+                        this.jTxtCodigoMod.getText(),
+                        this.jTxtDescripcionMod.getText().toUpperCase());
 
+                // Validamos si se guardo el registro
+                if (ans > 0) {
+                    JOptionPane.showMessageDialog(this, "Registro grabado con exito",
+                            "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
+                    this.clearForm(); //Limpiar los campos del formulario
+                }//Fin de la instrucción if
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + "\n" + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnGuardarModActionPerformed
 
     private void jBtnEliminarModMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarModMouseEntered
@@ -365,7 +430,66 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnEliminarModMouseExited
 
     private void jBtnEliminarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarModActionPerformed
-        // TODO add your handling code here:
+        int opc; //Determina el boton seleccionado en el mensaje de confirmación        
+        try {
+            if (jTxtCodigoMod.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese el Codigo "
+                        + "del registro que desea anular", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                negocio.ModalidadGraduacion mod = CtrlModalidadGraduacion.leerRegistro(this.jTxtCodigoMod.getText());
+
+                if (mod != null) {
+                    opc = JOptionPane.showConfirmDialog(this, "Esta intentando eliminar"
+                            + " un registro que contiene más \n"
+                            + " vinculaciones con otros datos"
+                            + " ¿Esta seguro de continuar?",
+                            "Eliminar", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE);
+                    if (opc == JOptionPane.YES_OPTION) {
+                        // Enviamos el INSS al controlador para realizar la anulacion del registro
+                        CtrlModalidadGraduacion.eliminar(this.jTxtCodigoMod.getText());
+
+                        // Mostramos un mensaje que confirma la anulacion del registro
+                        JOptionPane.showMessageDialog(this, "El registro de la modalidad: "
+                                + this.jTxtCodigoMod.getText()
+                                + "\n ha sido removido", "Eliminar",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        // Limpiamos los campos del formulario
+                        this.clearForm();
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
+                            + "\n Codigo de modalidad de graduacion: "
+                            + this.jTxtCodigoMod.getText()
+                            + " \n Asegurese de haberlo escrito correctamente",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    this.clearForm();
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnEliminarModActionPerformed
 
     private void jTxtDescripcionModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDescripcionModActionPerformed
@@ -380,6 +504,25 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTxtDescripcionModKeyTyped
 
+    // Metodo para limpiar los campos del formulario
+    private void clearForm() {
+        this.jTxtCodigoMod.setText("");
+        this.jTxtDescripcionMod.setText("");
+    }// Fin
+
+    // Metodo para validar que los campos del formulario sean rellenados
+    private boolean validateForm() {
+        boolean t = true;
+
+        if (jTxtCodigoMod.getText().isBlank()
+                || jTxtDescripcionMod.getText().isBlank()) {
+
+            // Si alguno de los campos esta vacio retorna falso
+            t = false;
+        }
+
+        return t;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarMod;
