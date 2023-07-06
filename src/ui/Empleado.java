@@ -4,9 +4,11 @@
  */
 package ui;
 
-
+import controlador.CtrlEmpleado;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +21,7 @@ public class Empleado extends javax.swing.JInternalFrame {
      */
     public Empleado() {
         initComponents();
-         jTblListarEmpleado.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD,12));
+        jTblListarEmpleado.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         jTblListarEmpleado.getTableHeader().setOpaque(false);
         jTblListarEmpleado.getTableHeader().setBackground(Color.black);
         jTblListarEmpleado.getTableHeader().setForeground(Color.BLACK);
@@ -158,7 +160,7 @@ public class Empleado extends javax.swing.JInternalFrame {
         jBtnEliminarEmp.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarEmp.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarEmp.setText("Eliminar");
+        jBtnEliminarEmp.setText("Anular");
         jBtnEliminarEmp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarEmpMouseEntered(evt);
@@ -184,7 +186,7 @@ public class Empleado extends javax.swing.JInternalFrame {
                 .addComponent(jBtnBuscarEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBtnEliminarEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +268,6 @@ public class Empleado extends javax.swing.JInternalFrame {
         jTblListarEmpleado.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarEmpleado.setRowHeight(25);
         jTblListarEmpleado.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarEmpleado.setShowHorizontalLines(true);
         jTblListarEmpleado.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarEmpleado);
 
@@ -309,8 +310,8 @@ public class Empleado extends javax.swing.JInternalFrame {
 
     private void jTxtApellido2EmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtApellido2EmpKeyTyped
         // TODO add your handling code here:
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -321,8 +322,8 @@ public class Empleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTxtApellido1EmpActionPerformed
 
     private void jTxtApellido1EmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtApellido1EmpKeyTyped
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -333,51 +334,198 @@ public class Empleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTxtNombresEmpActionPerformed
 
     private void jTxtNombresEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombresEmpKeyTyped
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_jTxtNombresEmpKeyTyped
 
     private void jBtnBuscarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarEmpActionPerformed
-        /*try {
-            // Preparar los datos que se guardaran del tecnico:
-            //ResultSet rst = Ctr_Tutor.buscar(this.jTxtINSS.getText());
-            String inss = this.jTxtINSS.getText();
-            String sql = "SELECT * FROM Tutor";
-            cnx.
+        try {
+            // Validamos que el campo INSS sea rellenado
+            // Ya que es el insumo para realizar la busqueda de un Empleado en la Base de datos
+            if (jTxtINSSEmp.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Realizar el filtrado de un registro indicado por inns:            
+                String value = this.jTxtINSSEmp.getText();
+                negocio.emp em = CtrlEmpleado.leerRegistro(value);
+                //Si se obtuvo el registro, se muestra
+                if (em != null) {
+                    this.jTxtNombresEmp.setText(em.getNombre());
+                    this.jTxtApellido1Emp.setText(em.getP_apellido());
+                    this.jTxtApellido2Emp.setText(em.getS_apellido());
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado "
+                            + "el \n registro, revise los datos e intente nuevamente",
+                            "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
-            if (rst > 0) {
-                JOptionPane.showMessageDialog(this, "Registro grabado con exito"
-                    , "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
-            }//Fin de la instrucción if
-        } catch(Exception ex){
-
-        }*/
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n en recurso de Base de Datos"
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        } // Fin
     }//GEN-LAST:event_jBtnBuscarEmpActionPerformed
 
     private void jBtnGuardarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarEmpActionPerformed
+        try {
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Preparar los datos que se guardaran del Empleado
+                int ans = CtrlEmpleado.insertar_empleado(
+                        this.jTxtINSSEmp.getText(),
+                        this.jTxtNombresEmp.getText().toUpperCase(),
+                        this.jTxtApellido1Emp.getText().toUpperCase(),
+                        this.jTxtApellido2Emp.getText().toUpperCase());
 
+                // Validamos si se guardo el registro
+                if (ans > 0) {
+                    JOptionPane.showMessageDialog(this, "Registro grabado con exito",
+                            "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
+                    this.clearForm(); //Limpiar los campos del formulario
+                }//Fin de la instrucción if
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + "\n" + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin 
     }//GEN-LAST:event_jBtnGuardarEmpActionPerformed
 
     private void jBtnEliminarEmpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarEmpMouseEntered
-        jBtnEliminarEmp.setBackground(new Color(255,0,0));
+        jBtnEliminarEmp.setBackground(new Color(255, 0, 0));
     }//GEN-LAST:event_jBtnEliminarEmpMouseEntered
 
     private void jBtnEliminarEmpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarEmpMouseExited
-        jBtnEliminarEmp.setBackground(new Color(204,204,204));
+        jBtnEliminarEmp.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_jBtnEliminarEmpMouseExited
 
     private void jBtnEliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarEmpActionPerformed
-        // TODO add your handling code here:
+        int opc; //Determina el boton seleccionado en el mensaje de confirmación        
+        try {
+            if (jTxtINSSEmp.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese el INSS "
+                        + "del registro que desea anular", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                negocio.emp em = CtrlEmpleado.leerRegistro(this.jTxtINSSEmp.getText());
+
+                if (em != null) {
+                    opc = JOptionPane.showConfirmDialog(this, "Esta intentando eliminar"
+                            + " un registro que contiene más \n"
+                            + " vinculaciones con otros datos"
+                            + " ¿Esta seguro de continuar?",
+                            "Eliminar", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE);
+                    if (opc == JOptionPane.YES_OPTION) {
+                        // Enviamos el INSS al controlador para realizar la anulacion del registro
+                        CtrlEmpleado.eliminar(this.jTxtINSSEmp.getText());
+
+                        // Mostramos un mensaje que confirma la anulacion del registro
+                        JOptionPane.showMessageDialog(this, "El registro del Empleado: "
+                                + this.jTxtINSSEmp.getText()
+                                + "\n ha sido removido", "Eliminar",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        // Limpiamos los campos del formulario
+                        this.clearForm();
+                    }
+                } else{
+                    JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
+                            + "\n Numero de INSS: "
+                            + this.jTxtINSSEmp.getText()
+                            + " \n Asegurese de haberlo escrito correctamente",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    this.clearForm();
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnEliminarEmpActionPerformed
 
     private void jTxtINSSEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtINSSEmpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtINSSEmpActionPerformed
 
+    // Metodo para limpiar los campos del formulario
+    private void clearForm() {
+        this.jTxtINSSEmp.setText("");
+        this.jTxtNombresEmp.setText("");
+        this.jTxtApellido1Emp.setText("");
+        this.jTxtApellido2Emp.setText("");
+    }// Fin
 
+    // Metodo para validar que los campos del formulario sean rellenados
+    private boolean validateForm() {
+        boolean t = true;
+
+        if (jTxtINSSEmp.getText().isBlank()
+                || jTxtNombresEmp.getText().isBlank()
+                || jTxtApellido1Emp.getText().isBlank()) {
+
+            // Si alguno de los campos esta vacio retorna falso
+            t = false;
+        }
+
+        return t;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarEmp;
     private javax.swing.JButton jBtnEliminarEmp;
