@@ -32,7 +32,6 @@ public class Login extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        JbtnRegistrar = new javax.swing.JButton();
         jBtnIniciar = new javax.swing.JButton();
         jPswContrasenia = new javax.swing.JPasswordField();
         jBtnSalir = new javax.swing.JButton();
@@ -46,8 +45,8 @@ public class Login extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 139, 130));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel2.setText("Acceso solo Administrador");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+        jLabel2.setText("Acceso de usuario");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/accept_ok_user_16735.png"))); // NOI18N
@@ -59,17 +58,6 @@ public class Login extends javax.swing.JInternalFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/internet_locked_padlock_password_secure_security_unlock_icon_127083.png"))); // NOI18N
         jLabel4.setText("Contraseña");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
-
-        JbtnRegistrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        JbtnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/account.png"))); // NOI18N
-        JbtnRegistrar.setText("Registrar");
-        JbtnRegistrar.setBorder(null);
-        JbtnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JbtnRegistrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(JbtnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 140, 40));
 
         jBtnIniciar.setBackground(new java.awt.Color(204, 204, 204));
         jBtnIniciar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -118,14 +106,6 @@ public class Login extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JbtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnRegistrarActionPerformed
-        RegistroAdmin register = new RegistroAdmin();
-        Sistema_UI.dskPanelMDI.add(register);
-        register.toFront();
-        register.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_JbtnRegistrarActionPerformed
-
     private void jBtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIniciarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnIniciarActionPerformed
@@ -136,7 +116,6 @@ public class Login extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JbtnRegistrar;
     private javax.swing.JButton jBtnIniciar;
     private javax.swing.JButton jBtnSalir;
     private javax.swing.JLabel jLabel1;

@@ -96,7 +96,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
 
         jBtnBorrarGra.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnBorrarGra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnBorrarGra.setText("Eliminar");
+        jBtnBorrarGra.setText("Anular");
         jBtnBorrarGra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnBorrarGraActionPerformed(evt);
@@ -116,7 +116,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
                 .addComponent(jBtnGuardarGra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnBorrarGra)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

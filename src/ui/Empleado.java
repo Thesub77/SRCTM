@@ -73,9 +73,9 @@ public class Empleado extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombres");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 70, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 70, -1));
 
-        jTxtApellido2Emp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtApellido2Emp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtApellido2Emp.setBorder(null);
         jTxtApellido2Emp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,11 +87,11 @@ public class Empleado extends javax.swing.JInternalFrame {
                 jTxtApellido2EmpKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtApellido2Emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 20));
+        jPanel2.add(jTxtApellido2Emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 150, 20));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Primer Apellido");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, 20));
 
         jTxtApellido1Emp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTxtApellido1Emp.setBorder(null);
@@ -109,13 +109,13 @@ public class Empleado extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Segundo Apellido");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo INSS");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        jTxtNombresEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNombresEmp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtNombresEmp.setBorder(null);
         jTxtNombresEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +127,7 @@ public class Empleado extends javax.swing.JInternalFrame {
                 jTxtNombresEmpKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtNombresEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 150, 20));
+        jPanel2.add(jTxtNombresEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 150, 20));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,7 +158,7 @@ public class Empleado extends javax.swing.JInternalFrame {
         jBtnEliminarEmp.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarEmp.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarEmp.setText("Eliminar");
+        jBtnEliminarEmp.setText("Anular");
         jBtnEliminarEmp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarEmpMouseEntered(evt);
@@ -206,10 +206,10 @@ public class Empleado extends javax.swing.JInternalFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 150, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 150, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 150, -1));
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, -1));
         jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
-        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 150, -1));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 150, -1));
 
         jTxtINSSEmp.setBorder(null);
         try {
@@ -217,7 +217,7 @@ public class Empleado extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTxtINSSEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtINSSEmp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtINSSEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtINSSEmpActionPerformed(evt);

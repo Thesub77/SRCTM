@@ -68,7 +68,7 @@ public class Asesor extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombres");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 70, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 70, -1));
 
         jTxtApellido2Asesor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTxtApellido2Asesor.setBorder(null);
@@ -82,9 +82,9 @@ public class Asesor extends javax.swing.JInternalFrame {
                 jTxtApellido2AsesorKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtApellido2Asesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 20));
+        jPanel2.add(jTxtApellido2Asesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 150, 20));
 
-        jTxtApellido1Asesor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtApellido1Asesor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtApellido1Asesor.setBorder(null);
         jTxtApellido1Asesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +96,7 @@ public class Asesor extends javax.swing.JInternalFrame {
                 jTxtApellido1AsesorKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtApellido1Asesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 150, 20));
+        jPanel2.add(jTxtApellido1Asesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 150, 20));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Segundo Apellido");
@@ -104,7 +104,7 @@ public class Asesor extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo INSS");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         jTxtNombresAsesor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTxtNombresAsesor.setBorder(null);
@@ -118,7 +118,7 @@ public class Asesor extends javax.swing.JInternalFrame {
                 jTxtNombresAsesorKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtNombresAsesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 150, 20));
+        jPanel2.add(jTxtNombresAsesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 150, 20));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,7 +157,7 @@ public class Asesor extends javax.swing.JInternalFrame {
         jBtnEliminarAsesor.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarAsesor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarAsesor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarAsesor.setText("Eliminar");
+        jBtnEliminarAsesor.setText("Anular");
         jBtnEliminarAsesor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarAsesorMouseEntered(evt);
@@ -204,11 +204,11 @@ public class Asesor extends javax.swing.JInternalFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 240, 50));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 150, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 150, -1));
-        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 150, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 150, -1));
+        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 150, -1));
         jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
-        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 150, -1));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 150, -1));
 
         jTxtINSSAsesor.setBorder(null);
         try {
@@ -216,13 +216,13 @@ public class Asesor extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTxtINSSAsesor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtINSSAsesor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtINSSAsesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtINSSAsesorActionPerformed(evt);
             }
         });
-        jPanel2.add(jTxtINSSAsesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 150, 20));
+        jPanel2.add(jTxtINSSAsesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 150, 20));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Datos Asesor");
@@ -298,7 +298,7 @@ public class Asesor extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Primer Apellido");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 20));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, 20));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 470));
 

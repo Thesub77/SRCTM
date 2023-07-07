@@ -91,12 +91,12 @@ public class Carrera extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 60, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 103, 150, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Descripción");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 60, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(245, 211, 17));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,7 +224,7 @@ public class Carrera extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 155, -1, -1));
 
-        jTxtDescripcionCarrera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtDescripcionCarrera.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtDescripcionCarrera.setBorder(null);
         jTxtDescripcionCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +239,7 @@ public class Carrera extends javax.swing.JInternalFrame {
         jPanel1.add(jTxtDescripcionCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 83, 150, 20));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 103, 150, -1));
 
-        jTxtCodigoCarrera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtCodigoCarrera.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtCodigoCarrera.setBorder(null);
         jTxtCodigoCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

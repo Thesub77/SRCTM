@@ -4,12 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/Sistema_UI.java</file>
-            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/ModalidadGraduacion.java</file>
-            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/ReporteGrado.java</file>
-            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/ReporteCarrera.java</file>
-            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/ReporteMonografia.java</file>
-            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/ReporteTutor.java</file>
-            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/ReporteSemestre.java</file>
+            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/Carrera.java</file>
+            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/Consultas.java</file>
+            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/Tutor.java</file>
+            <file>file:/C:/Users/Dell%20Latitude%207490/Documents/NetBeansProjects/SRCTM/SRCTM/src/ui/Login.java</file>
         </group>
     </open-files>
 </project-private>

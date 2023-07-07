@@ -65,9 +65,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombres");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 70, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 70, -1));
 
-        jTxtApellido2Estu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtApellido2Estu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtApellido2Estu.setBorder(null);
         jTxtApellido2Estu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,13 +79,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 jTxtApellido2EstuKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtApellido2Estu, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 20));
+        jPanel2.add(jTxtApellido2Estu, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 150, 20));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Primer Apellido");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, 20));
 
-        jTxtApellido1Estu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtApellido1Estu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtApellido1Estu.setBorder(null);
         jTxtApellido1Estu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,13 +101,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Segundo Apellido");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Carnet");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        jTxtNombresEstu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNombresEstu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtNombresEstu.setBorder(null);
         jTxtNombresEstu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +119,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 jTxtNombresEstuKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtNombresEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 150, 20));
+        jPanel2.add(jTxtNombresEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 150, 20));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -150,7 +150,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jBtnEliminarEstu.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarEstu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarEstu.setText("Eliminar");
+        jBtnEliminarEstu.setText("Anular");
         jBtnEliminarEstu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarEstuMouseEntered(evt);
@@ -198,10 +198,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 150, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 150, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 150, -1));
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, -1));
         jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
-        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 150, -1));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 150, -1));
 
         jTxtINSSEstu.setBorder(null);
         try {
@@ -209,7 +209,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTxtINSSEstu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtINSSEstu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtINSSEstu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtINSSEstuActionPerformed(evt);
