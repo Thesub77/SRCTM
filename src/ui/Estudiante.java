@@ -4,8 +4,10 @@
  */
 package ui;
 
+import controlador.CtrlEstudiante;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.sql.SQLException;
 
 /**
  *
@@ -320,8 +322,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     private void jTxtApellido2EstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtApellido2EstuKeyTyped
         // TODO add your handling code here:
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -332,8 +334,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTxtApellido1EstuActionPerformed
 
     private void jTxtApellido1EstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtApellido1EstuKeyTyped
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -344,50 +346,200 @@ public class Estudiante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTxtNombresEstuActionPerformed
 
     private void jTxtNombresEstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombresEstuKeyTyped
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_jTxtNombresEstuKeyTyped
 
     private void jBtnBuscarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarEstuActionPerformed
-        /*try {
-            // Preparar los datos que se guardaran del tecnico:
-            //ResultSet rst = Ctr_Tutor.buscar(this.jTxtINSS.getText());
-            String inss = this.jTxtINSS.getText();
-            String sql = "SELECT * FROM Tutor";
-            cnx.
+        try {
+            // Validamos que el campo INSS sea rellenado
+            // Ya que es el insumo para realizar la busqueda de un Estudiante en la Base de datos
+            if (jTxtINSSEstu.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Realizar el filtrado de un registro indicado por inns:            
+                String value = this.jTxtINSSEstu.getText();
+                negocio.Estudiante es = CtrlEstudiante.leerRegistro(value);
+                //Si se obtuvo el registro, se muestra
+                if (es != null) {
+                    this.jTxtNombresEstu.setText(es.getNombre());
+                    this.jTxtApellido1Estu.setText(es.getP_apellido());
+                    this.jTxtApellido2Estu.setText(es.getS_apellido());
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado "
+                            + "el \n registro, revise los datos e intente nuevamente",
+                            "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
-            if (rst > 0) {
-                JOptionPane.showMessageDialog(this, "Registro grabado con exito"
-                    , "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
-            }//Fin de la instrucción if
-        } catch(Exception ex){
-
-        }*/
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n en recurso de Base de Datos"
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        } // Fin
     }//GEN-LAST:event_jBtnBuscarEstuActionPerformed
 
     private void jBtnGuardarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarEstuActionPerformed
+        try {
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Preparar los datos que se guardaran del Estudiante
+                int ans = CtrlEstudiante.insertar_estudiante(
+                        this.jTxtINSSEstu.getText(),
+                        this.jTxtNombresEstu.getText().toUpperCase(),
+                        this.jTxtApellido1Estu.getText().toUpperCase(),
+                        this.jTxtApellido2Estu.getText().toUpperCase());
 
+                // Validamos si se guardo el registro
+                if (ans > 0) {
+                    JOptionPane.showMessageDialog(this, "Registro grabado con exito",
+                            "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
+                    this.clearForm(); //Limpiar los campos del formulario
+                }//Fin de la instrucción if
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + "\n" + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin 
     }//GEN-LAST:event_jBtnGuardarEstuActionPerformed
 
     private void jBtnEliminarEstuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarEstuMouseEntered
-        jBtnEliminarEstu.setBackground(new Color(255,0,0));
+        jBtnEliminarEstu.setBackground(new Color(255, 0, 0));
     }//GEN-LAST:event_jBtnEliminarEstuMouseEntered
 
     private void jBtnEliminarEstuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarEstuMouseExited
-        jBtnEliminarEstu.setBackground(new Color(204,204,204));
+        jBtnEliminarEstu.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_jBtnEliminarEstuMouseExited
 
     private void jBtnEliminarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarEstuActionPerformed
-        // TODO add your handling code here:
+        // Anular un estudiante
+        int opc; //Determina el boton seleccionado en el mensaje de confirmación        
+        try {
+            if (jTxtINSSEstu.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese el Carnet "
+                        + "del registro que desea anular", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                negocio.Estudiante es = CtrlEstudiante.leerRegistro(this.jTxtINSSEstu.getText());
+
+                if (es != null) {
+                    opc = JOptionPane.showConfirmDialog(this, "Esta intentando eliminar"
+                            + " un registro que contiene más \n"
+                            + " vinculaciones con otros datos"
+                            + " ¿Esta seguro de continuar?",
+                            "Eliminar", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE);
+                    if (opc == JOptionPane.YES_OPTION) {
+                        // Enviamos el Carnet al controlador para realizar la anulacion del registro
+                        CtrlEstudiante.eliminar(this.jTxtINSSEstu.getText());
+
+                        // Mostramos un mensaje que confirma la anulacion del registro
+                        JOptionPane.showMessageDialog(this, "El registro del Estudiante: "
+                                + this.jTxtINSSEstu.getText()
+                                + "\n ha sido removido", "Eliminar",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        // Limpiamos los campos del formulario
+                        this.clearForm();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
+                            + "\n Numero de Carnet: "
+                            + this.jTxtINSSEstu.getText()
+                            + " \n Asegurese de haberlo escrito correctamente",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+
+                    // Limpiamos los campos del formulario
+                    this.clearForm();
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnEliminarEstuActionPerformed
 
     private void jTxtINSSEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtINSSEstuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtINSSEstuActionPerformed
 
+    // Metodo para limpiar los campos del formulario
+    private void clearForm() {
+        this.jTxtINSSEstu.setText("");
+        this.jTxtNombresEstu.setText("");
+        this.jTxtApellido1Estu.setText("");
+        this.jTxtApellido2Estu.setText("");
+    }// Fin
+
+    // Metodo para validar que los campos del formulario sean rellenados
+    private boolean validateForm() {
+        boolean t = true;
+
+        if (jTxtINSSEstu.getText().isBlank()
+                || jTxtNombresEstu.getText().isBlank()
+                || jTxtApellido1Estu.getText().isBlank()) {
+
+            // Si alguno de los campos esta vacio retorna falso
+            t = false;
+        }
+
+        return t;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarEstu;

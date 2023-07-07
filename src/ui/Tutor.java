@@ -470,7 +470,7 @@ public class Tutor extends javax.swing.JInternalFrame {
                         CtrlTutor.eliminar(this.jTxtINSSTutor.getText());
 
                         // Mostramos un mensaje que confirma la anulacion del registro
-                        JOptionPane.showMessageDialog(this, "El registro del Tutor:"
+                        JOptionPane.showMessageDialog(this, "El registro del Tutor: "
                                 + this.jTxtINSSTutor.getText()
                                 + "\n ha sido removido", "Eliminar",
                                 JOptionPane.INFORMATION_MESSAGE);
