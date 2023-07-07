@@ -272,6 +272,7 @@ public class Tutor extends javax.swing.JInternalFrame {
         jTblListarTutor.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarTutor.setRowHeight(25);
         jTblListarTutor.setSelectionBackground(new java.awt.Color(0, 51, 102));
+        jTblListarTutor.setShowHorizontalLines(true);
         jTblListarTutor.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarTutor);
 
