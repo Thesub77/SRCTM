@@ -32,9 +32,10 @@ public class Login extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        JbtnRegistrar = new javax.swing.JButton();
+        jBtnIniciar = new javax.swing.JButton();
         jPswContrasenia = new javax.swing.JPasswordField();
+        jBtnSalir = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -50,7 +51,7 @@ public class Login extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/accept_ok_user_16735.png"))); // NOI18N
-        jLabel3.setText("Usuario");
+        jLabel3.setText("Correo");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 95, -1));
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 153, -1));
 
@@ -59,30 +60,39 @@ public class Login extends javax.swing.JInternalFrame {
         jLabel4.setText("Contraseña");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        btnSalir.setBackground(new java.awt.Color(204, 204, 204));
-        btnSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit_delete_17889.png"))); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        JbtnRegistrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        JbtnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/account.png"))); // NOI18N
+        JbtnRegistrar.setText("Registrar");
+        JbtnRegistrar.setBorder(null);
+        JbtnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                JbtnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanel1.add(JbtnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 140, 40));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sleep_mode_prolonged_19365.png"))); // NOI18N
-        jButton1.setText("iniciar ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnIniciar.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnIniciar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/register (1).png"))); // NOI18N
+        jBtnIniciar.setText("Iniciar");
+        jBtnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnIniciarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, -1, -1));
+        jPanel1.add(jBtnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 110, -1));
         jPanel1.add(jPswContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 150, -1));
+
+        jBtnSalir.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit_delete_17889.png"))); // NOI18N
+        jBtnSalir.setText("Salir");
+        jBtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 110, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,18 +118,27 @@ public class Login extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
+    private void JbtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnRegistrarActionPerformed
+        RegistroAdmin register = new RegistroAdmin();
+        Sistema_UI.dskPanelMDI.add(register);
+        register.toFront();
+        register.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_JbtnRegistrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIniciarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnIniciarActionPerformed
+
+    private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton JbtnRegistrar;
+    private javax.swing.JButton jBtnIniciar;
+    private javax.swing.JButton jBtnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

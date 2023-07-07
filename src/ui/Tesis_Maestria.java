@@ -238,6 +238,11 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
 
         jCmbDiaTesMaes.setBackground(new java.awt.Color(204, 204, 204));
         jCmbDiaTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
+        jCmbDiaTesMaes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmbDiaTesMaesActionPerformed(evt);
+            }
+        });
         jPanel7.add(jCmbDiaTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 59, -1, -1));
 
         jCmbMesTesMaes.setBackground(new java.awt.Color(204, 204, 204));
@@ -404,6 +409,10 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
     private void jCmbSemestreGraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreGraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCmbSemestreGraActionPerformed
+
+    private void jCmbDiaTesMaesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbDiaTesMaesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCmbDiaTesMaesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

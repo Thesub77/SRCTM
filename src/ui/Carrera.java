@@ -34,7 +34,6 @@ public class Carrera extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTxtCodigoCarrera = new javax.swing.JFormattedTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -47,6 +46,7 @@ public class Carrera extends javax.swing.JInternalFrame {
         jBtnEliminarCar = new javax.swing.JButton();
         jTxtDescripcionCarrera = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
+        jTxtCodigoCarrera = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -55,11 +55,14 @@ public class Carrera extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 354, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Centaur", 3, 14)); // NOI18N
         jLabel13.setText("¡A la libertad por la Universidad!");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 368, 190, 20));
 
         jPanel4.setBackground(new java.awt.Color(51, 0, 102));
 
@@ -84,24 +87,16 @@ public class Carrera extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, -1));
+
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo");
-
-        jTxtCodigoCarrera.setBorder(null);
-        try {
-            jTxtCodigoCarrera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jTxtCodigoCarrera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTxtCodigoCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtCodigoCarreraActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 60, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 103, 150, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Descripción");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 60, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(245, 211, 17));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,6 +121,8 @@ public class Carrera extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 60, 397, 20));
 
         jTblListarCarrera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,6 +151,8 @@ public class Carrera extends javax.swing.JInternalFrame {
         jTblListarCarrera.setShowHorizontalLines(true);
         jTblListarCarrera.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarCarrera);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 81, 397, 136));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -223,6 +222,8 @@ public class Carrera extends javax.swing.JInternalFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 155, -1, -1));
+
         jTxtDescripcionCarrera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTxtDescripcionCarrera.setBorder(null);
         jTxtDescripcionCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -235,92 +236,27 @@ public class Carrera extends javax.swing.JInternalFrame {
                 jTxtDescripcionCarreraKeyTyped(evt);
             }
         });
+        jPanel1.add(jTxtDescripcionCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 83, 150, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 103, 150, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTxtCodigoCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(57, 57, 57)
-                                        .addComponent(jLabel7)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(83, 83, 83)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTxtDescripcionCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(30, 30, 30)))))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTxtCodigoCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTxtDescripcionCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(49, 49, 49)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))))
-        );
+        jTxtCodigoCarrera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtCodigoCarrera.setBorder(null);
+        jTxtCodigoCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtCodigoCarreraActionPerformed(evt);
+            }
+        });
+        jTxtCodigoCarrera.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtCodigoCarreraKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTxtCodigoCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 83, 150, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTxtCodigoCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodigoCarreraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtCodigoCarreraActionPerformed
 
     private void jBtnBuscarCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarCarActionPerformed
         /*try {
@@ -367,6 +303,16 @@ public class Carrera extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTxtDescripcionCarreraKeyTyped
 
+    private void jTxtCodigoCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodigoCarreraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtCodigoCarreraActionPerformed
+
+    private void jTxtCodigoCarreraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtCodigoCarreraKeyTyped
+        // TODO add your handling code here:
+         if (jTxtCodigoCarrera.getText().length() > 8)
+            evt.consume();
+    }//GEN-LAST:event_jTxtCodigoCarreraKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarCar;
@@ -386,7 +332,7 @@ public class Carrera extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTblListarCarrera;
-    private javax.swing.JFormattedTextField jTxtCodigoCarrera;
+    private javax.swing.JTextField jTxtCodigoCarrera;
     private javax.swing.JTextField jTxtDescripcionCarrera;
     // End of variables declaration//GEN-END:variables
 }

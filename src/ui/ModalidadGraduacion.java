@@ -37,7 +37,6 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTxtCodigoMod = new javax.swing.JFormattedTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -50,6 +49,10 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
         jBtnEliminarMod = new javax.swing.JButton();
         jTxtDescripcionMod = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
+        jTxtCodigoMod = new javax.swing.JTextField();
+
+        setClosable(true);
+        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -83,19 +86,6 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo");
-
-        jTxtCodigoMod.setBorder(null);
-        try {
-            jTxtCodigoMod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jTxtCodigoMod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTxtCodigoMod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtCodigoModActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Descripción");
@@ -232,6 +222,19 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jTxtCodigoMod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtCodigoMod.setBorder(null);
+        jTxtCodigoMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtCodigoModActionPerformed(evt);
+            }
+        });
+        jTxtCodigoMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtCodigoModKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -247,11 +250,11 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTxtCodigoMod, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(57, 57, 57)
-                                        .addComponent(jLabel7)))
+                                        .addComponent(jLabel7))
+                                    .addComponent(jTxtCodigoMod, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(83, 83, 83)
@@ -289,7 +292,7 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTxtCodigoMod, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
+                                .addGap(1, 1, 1)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
@@ -322,7 +325,7 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -332,10 +335,6 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTxtCodigoModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodigoModActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtCodigoModActionPerformed
 
     private void jBtnBuscarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarModActionPerformed
         try {
@@ -523,6 +522,17 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
 
         return t;
     }
+    private void jTxtCodigoModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodigoModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtCodigoModActionPerformed
+
+    private void jTxtCodigoModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtCodigoModKeyTyped
+        // TODO add your handling code here:
+        
+        if (jTxtCodigoMod.getText().length() > 8)
+            evt.consume();
+    }//GEN-LAST:event_jTxtCodigoModKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarMod;
@@ -542,7 +552,7 @@ public class ModalidadGraduacion extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTblListarMod;
-    private javax.swing.JFormattedTextField jTxtCodigoMod;
+    private javax.swing.JTextField jTxtCodigoMod;
     private javax.swing.JTextField jTxtDescripcionMod;
     // End of variables declaration//GEN-END:variables
 }
