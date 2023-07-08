@@ -62,9 +62,9 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombres");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 70, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 70, -1));
 
-        jTxtCorreoUsu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtCorreoUsu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtCorreoUsu.setBorder(null);
         jTxtCorreoUsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,15 +80,15 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Correo");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo INSS");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         jTxtNombresUsu.setEditable(false);
         jTxtNombresUsu.setBackground(new java.awt.Color(255, 255, 255));
-        jTxtNombresUsu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNombresUsu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtNombresUsu.setBorder(null);
         jTxtNombresUsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +131,7 @@ public class Usuario extends javax.swing.JInternalFrame {
         jBtnEliminarUsu.setBackground(new java.awt.Color(204, 204, 204));
         jBtnEliminarUsu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnEliminarUsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnEliminarUsu.setText("Eliminar");
+        jBtnEliminarUsu.setText("Anular");
         jBtnEliminarUsu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jBtnEliminarUsuMouseEntered(evt);
@@ -189,7 +189,7 @@ public class Usuario extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTxtINSSUsu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtINSSUsu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtINSSUsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtINSSUsuActionPerformed(evt);
@@ -259,7 +259,7 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 450, 20));
 
-        jTxtContraseniaUsu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtContraseniaUsu.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtContraseniaUsu.setBorder(null);
         jTxtContraseniaUsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +276,7 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Contraseña");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

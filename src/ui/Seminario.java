@@ -89,7 +89,7 @@ public class Seminario extends javax.swing.JInternalFrame {
 
         jBtnBorrarSemi.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnBorrarSemi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnBorrarSemi.setText("Eliminar");
+        jBtnBorrarSemi.setText("Anular");
         jBtnBorrarSemi.setMaximumSize(new java.awt.Dimension(1280, 650));
         jBtnBorrarSemi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class Seminario extends javax.swing.JInternalFrame {
                 .addComponent(jBtnGuardarSemi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnBorrarSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

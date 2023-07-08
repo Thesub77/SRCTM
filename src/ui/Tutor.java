@@ -79,9 +79,9 @@ public class Tutor extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombres");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 70, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 70, -1));
 
-        jTxtApellido2Tutor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtApellido2Tutor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtApellido2Tutor.setBorder(null);
         jTxtApellido2Tutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,13 +93,13 @@ public class Tutor extends javax.swing.JInternalFrame {
                 jTxtApellido2TutorKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtApellido2Tutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 20));
+        jPanel2.add(jTxtApellido2Tutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 150, 20));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Primer Apellido");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, 20));
 
-        jTxtApellido1Tutor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtApellido1Tutor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtApellido1Tutor.setBorder(null);
         jTxtApellido1Tutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,13 +115,13 @@ public class Tutor extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Segundo Apellido");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Codigo INSS");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        jTxtNombresTutor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNombresTutor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtNombresTutor.setBorder(null);
         jTxtNombresTutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +133,7 @@ public class Tutor extends javax.swing.JInternalFrame {
                 jTxtNombresTutorKeyTyped(evt);
             }
         });
-        jPanel2.add(jTxtNombresTutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 150, 20));
+        jPanel2.add(jTxtNombresTutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 150, 20));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -212,10 +212,10 @@ public class Tutor extends javax.swing.JInternalFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 150, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 150, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 150, -1));
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, -1));
         jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
-        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 150, -1));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 150, -1));
 
         jTxtINSSTutor.setBorder(null);
         try {
@@ -223,7 +223,7 @@ public class Tutor extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTxtINSSTutor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtINSSTutor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTxtINSSTutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtINSSTutorActionPerformed(evt);

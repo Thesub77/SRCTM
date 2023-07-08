@@ -89,7 +89,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
 
         jBtnBorrarTesMaes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnBorrarTesMaes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
-        jBtnBorrarTesMaes.setText("Eliminar");
+        jBtnBorrarTesMaes.setText("Anular");
         jBtnBorrarTesMaes.setMaximumSize(new java.awt.Dimension(1280, 650));
         jBtnBorrarTesMaes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
                 .addComponent(jBtnGuardarTesMaes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnBorrarTesMaes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
