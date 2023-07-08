@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import servicios.Conexion;
 
 /**
@@ -73,6 +74,23 @@ public class Tutor extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(204, 204, 204));
         setClosable(true);
         setIconifiable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -237,24 +255,7 @@ public class Tutor extends javax.swing.JInternalFrame {
 
         jTblListarTutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo Inss", "Nombres", "Apellidos"
@@ -272,7 +273,6 @@ public class Tutor extends javax.swing.JInternalFrame {
         jTblListarTutor.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarTutor.setRowHeight(25);
         jTblListarTutor.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarTutor.setShowHorizontalLines(true);
         jTblListarTutor.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarTutor);
 
@@ -337,6 +337,8 @@ public class Tutor extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Registro grabado con exito",
                             "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
                     this.clearForm(); //Limpiar los campos del formulario
+                    this.limpiar();
+                    this.listado();
                 }//Fin de la instrucción if
             }
 
@@ -478,6 +480,8 @@ public class Tutor extends javax.swing.JInternalFrame {
 
                         // Limpiamos los campos del formulario
                         this.clearForm();
+                        this.limpiar();
+                        this.listado();
                     }
                 } else{
                     JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
@@ -521,6 +525,60 @@ public class Tutor extends javax.swing.JInternalFrame {
         jBtnEliminarTutor.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_jBtnEliminarTutorMouseExited
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        try {
+            CtrlTutor.listar(jTblListarTutor);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    // Metodo para limpiar tabla
+    private void limpiar(){
+        DefaultTableModel tb = (DefaultTableModel) jTblListarTutor.getModel();
+        tb.setRowCount(0);
+    }
+    
+    // Metodo para listar
+    private void listado(){
+        try {
+            CtrlTutor.listar(jTblListarTutor);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }
     // Metodo para limpiar los campos del formulario
     private void clearForm() {
         this.jTxtINSSTutor.setText("");
