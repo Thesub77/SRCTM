@@ -2,6 +2,8 @@ package negocio;
 
 import datos.DB_Evaluador;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Evaluador extends Empleado {
 
@@ -93,4 +95,14 @@ public class Evaluador extends Empleado {
         return bdE.borrar(inss);
     }
 
+    // Metodo para listar Tutores
+    public List<Evaluador> leerEvaluadores () throws 
+                                                   ClassNotFoundException,
+                                                   InstantiationException,
+                                                   IllegalAccessException,
+                                                   SQLException
+    {
+        DB_Evaluador bdTut = new DB_Evaluador ();
+        return (ArrayList) bdTut.listadoEvaluadores();
+    }//Fin de método
 }

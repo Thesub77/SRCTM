@@ -7,6 +7,9 @@ import java.util.List;
 
 public class Tutor extends Empleado {
 
+    private int idTut;
+    
+    // Constructores
     public Tutor() {
         this.inss = "";
         this.nombre = "";
@@ -21,6 +24,15 @@ public class Tutor extends Empleado {
         this.s_apellido = s_apellido;
     }
 
+    // GET y SET
+    public int getIdTut() {
+        return idTut;
+    }
+
+    public void setIdTut(int idTut) {
+        this.idTut = idTut;
+    }
+    
     public String getInss() {
         return inss;
     }
@@ -106,5 +118,16 @@ public class Tutor extends Empleado {
         DB_Tutor bdTut = new DB_Tutor ();
         return (ArrayList) bdTut.listadoTutores();
     }//Fin de método
+    
+    // Listado de tutores para combobox
+    public ArrayList <Tutor> listaTutores () throws ClassNotFoundException,
+                                                 InstantiationException,
+                                                 IllegalAccessException,
+                                                 SQLException
+    {
+        //Crear la instancia de BD_Facultad
+        DB_Tutor tut = new DB_Tutor ();
+        return tut.leerTutores(); //Leer los registros
+    }//Fin
 
 }

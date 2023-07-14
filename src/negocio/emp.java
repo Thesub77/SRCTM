@@ -2,8 +2,13 @@ package negocio;
 
 import datos.DB_Empleado;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class emp extends Empleado{
+    
+    // Metodos de instancia
+    protected int idEmpleado;
     
     // Constructores
     public emp() {
@@ -52,6 +57,14 @@ public class emp extends Empleado{
     public void setS_apellido(String s_apellido) {
         this.s_apellido = s_apellido;
     }
+
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
     
     // Inicio de la sobre-escritura de metodos
     // Metodo para insertar un registro de Empleado
@@ -95,4 +108,15 @@ public class emp extends Empleado{
         DB_Empleado bdEm = new DB_Empleado();
         return bdEm.borrar(inss);
     }
+    
+    // Metodo para listar empleados
+    public List<emp> leerEmpleados () throws 
+                                                   ClassNotFoundException,
+                                                   InstantiationException,
+                                                   IllegalAccessException,
+                                                   SQLException
+    {
+        DB_Empleado bdTut = new DB_Empleado ();
+        return (ArrayList) bdTut.listadoEmpleados();
+    }//Fin de método
 }

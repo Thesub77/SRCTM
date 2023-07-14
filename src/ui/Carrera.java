@@ -8,6 +8,7 @@ import controlador.CtrlCarrera;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -55,6 +56,23 @@ public class Carrera extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximumSize(new java.awt.Dimension(841, 437));
         setPreferredSize(new java.awt.Dimension(841, 437));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -129,11 +147,7 @@ public class Carrera extends javax.swing.JInternalFrame {
 
         jTblListarCarrera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Código", "Descripción"
@@ -142,9 +156,16 @@ public class Carrera extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarCarrera.setFocusable(false);
@@ -153,6 +174,9 @@ public class Carrera extends javax.swing.JInternalFrame {
         jTblListarCarrera.setSelectionBackground(new java.awt.Color(0, 51, 102));
         jTblListarCarrera.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarCarrera);
+        if (jTblListarCarrera.getColumnModel().getColumnCount() > 0) {
+            jTblListarCarrera.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 81, 397, 136));
 
@@ -171,7 +195,7 @@ public class Carrera extends javax.swing.JInternalFrame {
         jBtnGuardarCar.setBackground(new java.awt.Color(204, 204, 204));
         jBtnGuardarCar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarCar.setText("Guardar");
+        jBtnGuardarCar.setText("Registrar");
         jBtnGuardarCar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnGuardarCar.setMaximumSize(new java.awt.Dimension(107, 30));
         jBtnGuardarCar.setMinimumSize(new java.awt.Dimension(107, 30));
@@ -318,6 +342,8 @@ public class Carrera extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Registro grabado con exito",
                             "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
                     this.clearForm(); //Limpiar los campos del formulario
+                    this.limpiar();
+                    this.listado();
                 }//Fin de la instrucción if
             }
 
@@ -380,6 +406,8 @@ public class Carrera extends javax.swing.JInternalFrame {
 
                         // Limpiamos los campos del formulario
                         this.clearForm();
+                        this.limpiar();
+                        this.listado();
                     }
                 } else{
                     JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
@@ -437,6 +465,61 @@ public class Carrera extends javax.swing.JInternalFrame {
             evt.consume();
     }//GEN-LAST:event_jTxtCodigoCarreraKeyTyped
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        try {
+            CtrlCarrera.listarTablaCarrera(jTblListarCarrera);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    // Metodo para limpiar tabla
+    private void limpiar(){
+        DefaultTableModel tb = (DefaultTableModel) jTblListarCarrera.getModel();
+        tb.setRowCount(0);
+    }
+    // Metodo para listar
+    private void listado(){
+        try {
+            CtrlCarrera.listarTablaCarrera(jTblListarCarrera);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }
+    
     // Metodo para limpiar los campos del formulario
     private void clearForm() {
         this.jTxtCodigoCarrera.setText("");

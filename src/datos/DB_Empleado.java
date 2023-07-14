@@ -1,6 +1,8 @@
 package datos;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import negocio.emp;
 import servicios.Conexion;
 import servicios.MS_SQLServer;
@@ -83,6 +85,7 @@ public class DB_Empleado {
                     cnx.resultado.getString("nombre_empleado"),
                     cnx.resultado.getString("p_apellido_empleado"),
                     cnx.resultado.getString("s_apellido_empleado"));
+            em.setIdEmpleado(cnx.resultado.getInt("id_empleado"));
         }//Fin
 
         return em;//Retornar el objeto con los valores encontrados
@@ -128,5 +131,37 @@ public class DB_Empleado {
         
         //Retornará verdadero si hubieron registros afectados false sino es así
         return cnx.pst.executeUpdate() > 0;
+    }//Fin
+    
+    public List<emp> listadoEmpleados () throws ClassNotFoundException,
+                                                     InstantiationException,
+                                                     IllegalAccessException,
+                                                     SQLException
+    {
+       List<emp> list = null; //Lista de instancia a retornar
+        cnx = new MS_SQLServer (); //Establecer la instancia para la conexión
+        //Consultar todos los registros que estan activo para retornarlos
+        String sql = "EXECUTE listar_empleado";
+               //sql += " correo_institucional, funcion_laboral";
+               //sql += " FROM personal_operativo WHERE \"anulado\" <> 0";
+        
+        cnx.pst = cnx.conexion.prepareStatement(sql);
+        //Ejecutar la consulta del PreparedStatement
+        cnx.resultado = cnx.pst.executeQuery();
+        
+        //Verificar que se obtuvieron registros, si hay se procesan        
+        if (cnx.resultado != null){
+            list = new ArrayList<>();//ArrayList almacen
+            while (cnx.resultado.next()) {
+              emp p = new emp (); //Generar instanc
+              p.setInss(cnx.resultado.getString("INSS_empleado"));
+              p.setNombre(cnx.resultado.getString("nombre_empleado"));
+              p.setP_apellido(cnx.resultado.getString("p_apellido_empleado") + " " + cnx.resultado.getString("s_apellido_empleado"));
+              //p.setS_apellido(cnx.resultado.getString("s_apellido_tutor"));
+              list.add(p); //Agregar el resultado a la lista
+            }//Fin de la instrucción While
+        }//Fin de la instrucción if
+        
+        return list;
     }//Fin
 }

@@ -49,7 +49,7 @@ public class ReporteTutor extends javax.swing.JInternalFrame {
 
         JlblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         JlblTitulo.setText("Reporte de tutorias\n\n\n\n");
-        jPanel1.add(JlblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 130, -1));
+        jPanel1.add(JlblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 150, -1));
 
         jTblListarReporteSemestre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,7 +88,6 @@ public class ReporteTutor extends javax.swing.JInternalFrame {
         jTblListarReporteSemestre.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarReporteSemestre.setRowHeight(25);
         jTblListarReporteSemestre.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        jTblListarReporteSemestre.setShowHorizontalLines(true);
         jTblListarReporteSemestre.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarReporteSemestre);
 

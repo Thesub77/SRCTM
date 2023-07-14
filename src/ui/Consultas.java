@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package ui;
+
+import controlador.CtrlConsultas;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,12 +11,19 @@ package ui;
  */
 public class Consultas extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Consultas
-     */
+    String[] fila3 = {"Carrera", "Modalidad", "Titulo", "Fecha Defensa", "Resumen"};
+    
+    DefaultTableModel dmt1 = new DefaultTableModel();
+    
+    
     public Consultas() {
         initComponents();
         jPnlFiltro.setVisible(false);
+        dmt1.addColumn("Carrera");
+        dmt1.addColumn("Modalidad");
+        dmt1.addColumn("Titulo Trabajo");
+        dmt1.addColumn("Fecha");
+        dmt1.addColumn("Resumen");
     }
 
     /**
@@ -188,42 +196,31 @@ public class Consultas extends javax.swing.JInternalFrame {
 
         jTblListarTutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Tituo", "Integrante", "Carrera"
+                "Carrera", "Modalidad", "Titulo trabajo", "Fecha", "Resumen trabajo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarTutor.setFocusable(false);
         jTblListarTutor.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarTutor.setRowHeight(25);
         jTblListarTutor.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarTutor.setShowHorizontalLines(true);
         jTblListarTutor.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarTutor);
 
@@ -243,6 +240,11 @@ public class Consultas extends javax.swing.JInternalFrame {
 
         jBtnBuscarConsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscar.png"))); // NOI18N
         jBtnBuscarConsu.setText("Buscar");
+        jBtnBuscarConsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarConsuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnlAnimacionLayout = new javax.swing.GroupLayout(jPnlAnimacion);
         jPnlAnimacion.setLayout(jPnlAnimacionLayout);
@@ -250,25 +252,21 @@ public class Consultas extends javax.swing.JInternalFrame {
             jPnlAnimacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlAnimacionLayout.createSequentialGroup()
                 .addComponent(jLTitulo)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
                 .addComponent(jBtnBuscarConsu)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 33, Short.MAX_VALUE))
         );
         jPnlAnimacionLayout.setVerticalGroup(
             jPnlAnimacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlAnimacionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPnlAnimacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPnlAnimacionLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPnlAnimacionLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jTxtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBtnBuscarConsu))
-                .addGap(27, 27, 27))
+                .addGroup(jPnlAnimacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnBuscarConsu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
 
         jPanel2.add(jPnlAnimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 560, 60));
@@ -311,7 +309,46 @@ public class Consultas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPnlFiltroMouseEntered
 
+    private void jBtnBuscarConsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarConsuActionPerformed
+        // Realizar consultas
+        try {
+            //1. Cargar la lista de Facultades
+            /*for (String trabajo : CtrlConsultas.listaPorTitulo(jTxtBarraBusqueda.getText())) {
+                String[] datos = trabajo.split(",");
+                dmt1.addRow(datos);
+                
+            }//Fin de for
+            jTblListarTutor.setModel(dmt1);*/
+            this.limpiar();
+            CtrlConsultas.listar(jTblListarTutor, this.jTxtBarraBusqueda.getText());
 
+            //2. Cargar la lista de departamentos
+            //for (negocio.Tutor tut : CtrlTutor.listar()) {
+            //    this.jCmbTutorSemi.addItem(tut.getNombre() + " " + tut.getP_apellido());
+            //}//Fin for departamentos            
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Se ha producido una falla"
+                    + " al tratar de listar los registros solicitados \n "
+                    + "\n " + ex, "Error al cargar "
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        /*catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se ha producido una falla"
+                    + " al tratar de listar Facultades y Departamentos \n "
+                    + " registrados actualmente", "Error al cargar"
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }*/
+    }//GEN-LAST:event_jBtnBuscarConsuActionPerformed
+
+    // Metodo para limpiar tabla
+    private void limpiar(){
+        DefaultTableModel tb = (DefaultTableModel) jTblListarTutor.getModel();
+        tb.setRowCount(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarConsu;
     private javax.swing.JCheckBox jChkProtocolosCon;

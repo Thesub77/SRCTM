@@ -1,6 +1,8 @@
 package datos;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import negocio.Carrera;
 import servicios.Conexion;
 import servicios.MS_SQLServer;
@@ -118,5 +120,90 @@ public class DB_Carrera {
 
         //Retornará verdadero si hubieron registros afectados false sino es así
         return cnx.pst.executeUpdate() > 0;
+    }//Fin
+    
+    // Listado para combobox
+    public ArrayList<String> leerCarreras () 
+                                    throws java.lang.ClassNotFoundException,
+                                           java.lang.InstantiationException,
+                                           java.lang.IllegalAccessException,
+                                           java.sql.SQLException
+                                           
+    {
+      //Definir el ArrayList que contendra los nombres de las Carreras
+        ArrayList<String> lstFact = null;        
+      //Crear la instancia de conexión
+        cnx = new MS_SQLServer ();
+      //Definir el String que se encarga de llamar a la vista
+       String sql = "SELECT descripcion_carrera FROM Carrera";
+       cnx.pst = cnx.conexion.prepareStatement(sql);
+       cnx.resultado = cnx.pst.executeQuery();
+       
+       //Verificar resultados de la consulta
+       if (cnx.resultado != null)
+       {
+           lstFact = new ArrayList<> ();
+           while (cnx.resultado.next()) {
+               lstFact.add(cnx.resultado.getString("descripcion_carrera"));
+           }//Fin de la instrucción while
+       }//Fin del condicional if
+      return lstFact; 
+    }//Fin
+    
+    // Buscar el id de una carrera con su descripcion
+    public int leerId (String descripcionCarrera) throws  java.lang.ClassNotFoundException,
+                                            java.lang.InstantiationException,
+                                            java.lang.IllegalAccessException,
+                                            java.sql.SQLException
+    {
+       int value = 0;
+        //Definir la instancia de conexión con la base de datos
+        cnx = new MS_SQLServer ();
+        /*Esta vez la sentencia es una cadena que invoca un procedimiento 
+          que contiene un parámetro de salida*/
+        String sql = "SELECT id_carrera FROM Carrera ";
+               sql += "WHERE \"descripcion_carrera\" = ?";
+        //Invocar a instancia de la clase CallableStatement que ejecuta consulta 
+        cnx.pst = cnx.conexion.prepareStatement(sql);
+        cnx.pst.setString(1, descripcionCarrera);
+        cnx.resultado = cnx.pst.executeQuery();
+        
+        //Verificar resultados de la consulta
+       if (cnx.resultado.next())       
+           value = cnx.resultado.getInt("id_carrera");        
+        //Retornar el valor obtenido
+        return value;
+    }
+    
+    public List<Carrera> listadoCarrerasTb () throws ClassNotFoundException,
+                                                     InstantiationException,
+                                                     IllegalAccessException,
+                                                     SQLException
+    {
+       List<Carrera> list = null; //Lista de instancia a retornar
+        cnx = new MS_SQLServer (); //Establecer la instancia para la conexión
+        //Consultar todos los registros que estan activo para retornarlos
+        String sql = "EXECUTE listar_carrera";
+               //sql += " correo_institucional, funcion_laboral";
+               //sql += " FROM personal_operativo WHERE \"anulado\" <> 0";
+        
+        cnx.pst = cnx.conexion.prepareStatement(sql);
+        //Ejecutar la consulta del PreparedStatement
+        cnx.resultado = cnx.pst.executeQuery();
+        
+        //Verificar que se obtuvieron registros, si hay se procesan        
+        if (cnx.resultado != null){
+            list = new ArrayList<>();//ArrayList almacen
+            while (cnx.resultado.next()) {
+              Carrera p = new Carrera (); //Generar instanc
+              p.setCodigoCarrera(cnx.resultado.getString("codigo_carrera"));
+              p.setDescripcion(cnx.resultado.getString("descripcion_carrera"));
+              //p.setP_apellido(cnx.resultado.getString("p_apellido_tutor") + " " + cnx.resultado.getString("s_apellido_tutor"));
+              //p.setS_apellido(cnx.resultado.getString("s_apellido_tutor"));
+              list.add(p); //Agregar el resultado a la lista
+            }//Fin de la instrucción While
+        }//Fin de la instrucción if
+        
+        return list;
     }//Fin
 }

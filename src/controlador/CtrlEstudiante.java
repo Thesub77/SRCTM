@@ -1,6 +1,8 @@
 package controlador;
 
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import negocio.Estudiante;
 
 public class CtrlEstudiante {
@@ -39,4 +41,23 @@ public class CtrlEstudiante {
         Estudiante es = new Estudiante();
         return es.borrarRegistro(carnet);
     }
+    
+    public static void listar (javax.swing.JTable tModel) throws
+                                                  ClassNotFoundException,
+                                                  InstantiationException,
+                                                  InstantiationException,
+                                                  IllegalAccessException,
+                                                  SQLException
+    {
+        DefaultTableModel modelo = (DefaultTableModel) tModel.getModel();
+        //Obtener la lista de la capa de negocio
+        Estudiante tut = new Estudiante ();
+        List<Estudiante> t = tut.leerEstudiantes();
+        
+        //Recorrer los elementos de la lista
+        for (Estudiante ans : t) {
+            modelo.addRow(new Object [] {ans.getCarnet(), ans.getNombre(),
+                          ans.getP_apellido()});
+        }//Fin de la instrucción foreach  
+    }//Fin
 }

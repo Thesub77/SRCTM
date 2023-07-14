@@ -1,6 +1,7 @@
 package controlador;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import negocio.Tutor;
@@ -41,6 +42,7 @@ public class CtrlTutor {
         return t.borrarRegistro(inss);
     }
     
+    // Listar tutores en tabla
     public static void listar (javax.swing.JTable tModel) throws
                                                   ClassNotFoundException,
                                                   InstantiationException,
@@ -59,4 +61,14 @@ public class CtrlTutor {
                           ans.getP_apellido()});
         }//Fin de la instrucción foreach  
     }//Fin
+    
+    // Listado de tutores para combobox
+    public static ArrayList<Tutor> listar () throws ClassNotFoundException,
+                                              InstantiationException,
+                                              IllegalAccessException,
+                                              SQLException
+    {
+       Tutor tut = new Tutor ();
+       return tut.listaTutores();
+    }
 }

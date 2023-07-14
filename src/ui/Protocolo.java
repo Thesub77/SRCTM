@@ -105,7 +105,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
 
         jBtnGuardarProt.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarProt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarProt.setText("Guardar");
+        jBtnGuardarProt.setText("Registrar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -114,9 +114,9 @@ public class Protocolo extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBtnGuardarProt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jBtnBorrarProt)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +128,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31))
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 260, 60));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 280, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,7 +138,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 70, 22));
 
         jCmbModalidadProt.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbModalidadProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Seminario", "Tesis Monografica", " ", " ", " " }));
+        jCmbModalidadProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbModalidadProt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbModalidadProtActionPerformed(evt);
@@ -147,7 +147,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
         jPanel6.add(jCmbModalidadProt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 233, 32));
 
         jCmbCarreraProt.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbCarreraProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbCarreraProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbCarreraProt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbCarreraProtActionPerformed(evt);
@@ -164,7 +164,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 40, 25));
 
         jCmbTutorProt.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbTutorProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbTutorProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbTutorProt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbTutorProtActionPerformed(evt);
@@ -177,7 +177,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 50, 25));
 
         jCmbAsesorProt.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbAsesorProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbAsesorProt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbAsesorProt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbAsesorProtActionPerformed(evt);
@@ -256,7 +256,7 @@ public class Protocolo extends javax.swing.JInternalFrame {
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Registro Protocolo");
+        jLabel15.setText("Registro de Protocolos");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1320, 40));

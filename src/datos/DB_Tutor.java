@@ -83,10 +83,16 @@ public class DB_Tutor {
         //Recorrer los resultados obtenidos en la consulta si los hay
         if (cnx.resultado.next()) {
             //Recuperar los valores del registro y asignar al objeto p
-            t = new Tutor(cnx.resultado.getString("INSS_tutor"),
+            /*t = new Tutor(cnx.resultado.getString("INSS_tutor"),
                     cnx.resultado.getString("nombre_tutor"),
                     cnx.resultado.getString("p_apellido_tutor"),
-                    cnx.resultado.getString("s_apellido_tutor"));
+                    cnx.resultado.getString("s_apellido_tutor"));*/
+            t = new Tutor();
+            t.setIdTut(cnx.resultado.getInt("id_tutor"));
+            t.setInss(cnx.resultado.getString("INSS_tutor"));
+            t.setNombre(cnx.resultado.getString("nombre_tutor"));
+            t.setP_apellido(cnx.resultado.getString("p_apellido_tutor"));
+            t.setS_apellido(cnx.resultado.getString("s_apellido_tutor"));
         }//Fin
 
         return t;//Retornar el objeto con los valores encontrados
@@ -170,5 +176,38 @@ public class DB_Tutor {
         }//Fin de la instrucción if
         
         return list;
+    }//Fin
+    
+    // Listado para combobox
+    public ArrayList<Tutor> leerTutores () 
+                                    throws java.lang.ClassNotFoundException,
+                                           java.lang.InstantiationException,
+                                           java.lang.IllegalAccessException,
+                                           java.sql.SQLException
+                                           
+    {
+      //Definir el ArrayList que contendra los nombres de los Tutores
+        ArrayList<Tutor> lstTut = null;        
+      //Crear la instancia de conexión
+        cnx = new MS_SQLServer ();
+      //Definir el String que se encarga de realizar la consulta
+       String sql = "SELECT id_tutor, nombre_tutor, p_apellido_tutor, s_apellido_tutor FROM Tutor";
+       cnx.pst = cnx.conexion.prepareStatement(sql);
+       cnx.resultado = cnx.pst.executeQuery();
+       
+       //Verificar resultados de la consulta
+       if (cnx.resultado != null)
+       {
+           lstTut = new ArrayList<> ();
+           while (cnx.resultado.next()) {
+               Tutor t = new Tutor ();
+               t.setIdTut(cnx.resultado.getInt("id_tutor"));
+               t.setNombre(cnx.resultado.getString("nombre_tutor"));
+               t.setP_apellido(cnx.resultado.getString("p_apellido_tutor"));
+               t.setS_apellido(cnx.resultado.getString("s_apellido_tutor"));
+               lstTut.add(t); //Agregar los departamentos
+           }//Fin de la instrucción while
+       }//Fin del condicional if
+      return lstTut; 
     }//Fin
 }

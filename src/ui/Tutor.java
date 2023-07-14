@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package ui;
 
 import controlador.CtrlTutor;
@@ -168,7 +164,7 @@ public class Tutor extends javax.swing.JInternalFrame {
         jBtnGuardarTutor.setBackground(new java.awt.Color(204, 204, 204));
         jBtnGuardarTutor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarTutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarTutor.setText("Guardar");
+        jBtnGuardarTutor.setText("Registrar");
         jBtnGuardarTutor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnGuardarTutor.setMaximumSize(new java.awt.Dimension(107, 30));
         jBtnGuardarTutor.setMinimumSize(new java.awt.Dimension(107, 30));
@@ -202,8 +198,7 @@ public class Tutor extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jBtnGuardarTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBtnGuardarTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnBuscarTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -250,8 +245,8 @@ public class Tutor extends javax.swing.JInternalFrame {
         jPanel2.add(jTxtINSSTutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 150, 20));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Datos Tutor");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 87, -1));
+        jLabel1.setText("Registro de Tutores");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 160, -1));
 
         jTblListarTutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -264,9 +259,16 @@ public class Tutor extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarTutor.setFocusable(false);
@@ -275,6 +277,9 @@ public class Tutor extends javax.swing.JInternalFrame {
         jTblListarTutor.setSelectionBackground(new java.awt.Color(0, 51, 102));
         jTblListarTutor.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarTutor);
+        if (jTblListarTutor.getColumnModel().getColumnCount() > 0) {
+            jTblListarTutor.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 450, 360));
 
@@ -296,10 +301,10 @@ public class Tutor extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 450, 20));

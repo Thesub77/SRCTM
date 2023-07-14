@@ -1,6 +1,8 @@
 package controlador;
 
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import negocio.Evaluador;
 
 public class CtrlEvaluador {
@@ -39,4 +41,23 @@ public class CtrlEvaluador {
         Evaluador e = new Evaluador();
         return e.borrarRegistro(inss);
     }
+    
+    public static void listar (javax.swing.JTable tModel) throws
+                                                  ClassNotFoundException,
+                                                  InstantiationException,
+                                                  InstantiationException,
+                                                  IllegalAccessException,
+                                                  SQLException
+    {
+        DefaultTableModel modelo = (DefaultTableModel) tModel.getModel();
+        //Obtener la lista de la capa de negocio
+        Evaluador tut = new Evaluador ();
+        List<Evaluador> t = tut.leerEvaluadores();
+        
+        //Recorrer los elementos de la lista
+        for (Evaluador ans : t) {
+            modelo.addRow(new Object [] {ans.getInss(), ans.getNombre(),
+                          ans.getP_apellido()});
+        }//Fin de la instrucción foreach  
+    }//Fin
 }

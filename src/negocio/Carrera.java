@@ -2,6 +2,8 @@ package negocio;
 
 import datos.DB_Carrera;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Carrera {
     
@@ -74,5 +76,37 @@ public class Carrera {
         
         DB_Carrera bdCarr = new DB_Carrera();
         return bdCarr.borrar(codigo);
-    }
+    } // Fin
+    
+    // Listado de carreras
+    public ArrayList <String> listaCarreras () throws ClassNotFoundException,
+                                                 InstantiationException,
+                                                 IllegalAccessException,
+                                                 SQLException
+    {
+        //Crear la instancia de BD_Facultad
+        DB_Carrera carr = new DB_Carrera ();
+        return carr.leerCarreras(); //Leer los registros
+    }//Fin
+    
+    // Recuperar Id Carrera
+    public int buscarIdCarrera (String descripcionCarrera) throws ClassNotFoundException,
+                                                   InstantiationException,
+                                                   IllegalAccessException,
+                                                   SQLException
+    {
+       DB_Carrera carr = new DB_Carrera ();
+       return carr.leerId(descripcionCarrera);
+    }//Fin
+    
+    // Listado carreras en tabla
+    public List<Carrera> leerCarrerasTb () throws 
+                                                   ClassNotFoundException,
+                                                   InstantiationException,
+                                                   IllegalAccessException,
+                                                   SQLException
+    {
+        DB_Carrera bdTut = new DB_Carrera ();
+        return (ArrayList) bdTut.listadoCarrerasTb();
+    }//Fin de método
 }

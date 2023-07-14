@@ -1,25 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package ui;
 
-
+import controlador.CtrlCarrera;
+import controlador.CtrlEstudiante;
+import controlador.CtrlSeminario;
+import controlador.CtrlTutor;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import negocio.Estudiante;
 
-/**
- *
- * @author lnarvaezb
- */
 public class Seminario extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FrmPersonalTecnico
-     */
+    //Recuperación de los ID de los registros a insertar
+    private int idTutor;   //Variable para almacenar los id de los Tutores
+    private int idModalidad;   //Variable para almacenar el id de la modalidad
+    private int idCarrera; //Variable para almacenar los id de la carrera
+    private int idEst_1;  //Variable que almacenará al estudiante
+    private int idEst_2;  //Variable que almacenará al estudiante
+    private int idEst_3;  //Variable que almacenará al estudiante
+
     public Seminario() {
+        idTutor = 0;
+        idModalidad = 0;
+        idCarrera = 0;
+        idEst_1 = 0;
+        idEst_2 = 0;
+        idEst_3 = 0;
+
         initComponents();
     }
 
@@ -47,14 +64,14 @@ public class Seminario extends javax.swing.JInternalFrame {
         jBtnBuscarAutSemi1 = new javax.swing.JButton();
         jBtnBuscarAutSemi3 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jCmbModadSemi = new javax.swing.JComboBox<>();
         jCmbCarreraSemi = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jCmbTutorSemi = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jCmbSemestreSemi = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jTxtTutorNombre = new javax.swing.JTextField();
+        jBtnBuscarTutor = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -64,9 +81,7 @@ public class Seminario extends javax.swing.JInternalFrame {
         jTxtResumenSemi = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         jBtnExaminarSemi = new javax.swing.JButton();
-        jCmbDiaSemi = new javax.swing.JComboBox<>();
-        jCmbMesSemi = new javax.swing.JComboBox<>();
-        jCmbAnioSemi = new javax.swing.JComboBox<>();
+        jDtChFechaSeminario = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -80,6 +95,23 @@ public class Seminario extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(1218, 494));
         setMinimumSize(new java.awt.Dimension(320, 260));
         setPreferredSize(new java.awt.Dimension(1218, 494));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -99,7 +131,12 @@ public class Seminario extends javax.swing.JInternalFrame {
 
         jBtnGuardarSemi.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarSemi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarSemi.setText("Guardar");
+        jBtnGuardarSemi.setText("Registrar");
+        jBtnGuardarSemi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarSemiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -108,9 +145,9 @@ public class Seminario extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBtnGuardarSemi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jBtnBorrarSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,13 +159,14 @@ public class Seminario extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31))
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 370, 80));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 370, 80));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Autores"));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 47, 266, -1));
 
+        jTxtAutor2Semi.setEditable(false);
         jTxtAutor2Semi.setBorder(null);
         jTxtAutor2Semi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +175,7 @@ public class Seminario extends javax.swing.JInternalFrame {
         });
         jPanel5.add(jTxtAutor2Semi, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 72, 266, 19));
 
+        jTxtAutor1Semi.setEditable(false);
         jTxtAutor1Semi.setBorder(null);
         jTxtAutor1Semi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +185,7 @@ public class Seminario extends javax.swing.JInternalFrame {
         jPanel5.add(jTxtAutor1Semi, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 30, 266, 19));
         jPanel5.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 266, -1));
 
+        jTxtAutor3Semi.setEditable(false);
         jTxtAutor3Semi.setBorder(null);
         jTxtAutor3Semi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,28 +229,16 @@ public class Seminario extends javax.swing.JInternalFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setText("Modalidad");
-
-        jCmbModadSemi.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbModadSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " ", " " }));
-
         jCmbCarreraSemi.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbCarreraSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbCarreraSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        jCmbCarreraSemi.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCmbCarreraSemiItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Carrera");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setText("Tutor");
-
-        jCmbTutorSemi.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbTutorSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
-        jCmbTutorSemi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbTutorSemiActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Semestre");
@@ -223,52 +251,75 @@ public class Seminario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setText("Tutor");
+
+        jTxtTutorNombre.setEditable(false);
+        jTxtTutorNombre.setBorder(null);
+        jTxtTutorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtTutorNombreActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarTutor.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnBuscarTutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/a-la-vista.png"))); // NOI18N
+        jBtnBuscarTutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarTutorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCmbModadSemi, 0, 233, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCmbSemestreSemi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCmbCarreraSemi, 0, 233, Short.MAX_VALUE)
-                            .addComponent(jCmbTutorSemi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                            .addComponent(jTxtTutorNombre)
+                            .addComponent(jSeparator2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnBuscarTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCmbSemestreSemi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCmbCarreraSemi, 0, 233, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCmbModadSemi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(16, 16, 16))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                            .addComponent(jBtnBuscarTutor)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jTxtTutorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCmbCarreraSemi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCmbTutorSemi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCmbSemestreSemi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 370, 210));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 370, 150));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -298,20 +349,13 @@ public class Seminario extends javax.swing.JInternalFrame {
         jBtnExaminarSemi.setBackground(new java.awt.Color(204, 204, 204));
         jBtnExaminarSemi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
         jBtnExaminarSemi.setText("Examinar");
-
-        jCmbDiaSemi.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbDiaSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
-
-        jCmbMesSemi.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbMesSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
-        jCmbMesSemi.addActionListener(new java.awt.event.ActionListener() {
+        jBtnExaminarSemi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbMesSemiActionPerformed(evt);
+                jBtnExaminarSemiActionPerformed(evt);
             }
         });
 
-        jCmbAnioSemi.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbAnioSemi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año" }));
+        jDtChFechaSeminario.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -324,24 +368,22 @@ public class Seminario extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTxtResumenSemi)
-                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jTxtResumenSemi)
+                                .addGap(8, 8, 8))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTxtTemaSemi)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jCmbDiaSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(jCmbMesSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(jCmbAnioSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jDtChFechaSeminario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTxtTemaSemi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnExaminarSemi)
@@ -361,17 +403,11 @@ public class Seminario extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel8)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCmbDiaSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCmbMesSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCmbAnioSemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jDtChFechaSeminario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
@@ -380,7 +416,7 @@ public class Seminario extends javax.swing.JInternalFrame {
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jBtnExaminarSemi)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 400, 180));
@@ -397,12 +433,12 @@ public class Seminario extends javax.swing.JInternalFrame {
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Registro de seminario");
+        jLabel15.setText("Registro de seminarios");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1220, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 1240, 490));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 1240, 480));
 
         setBounds(0, 0, 1218, 494);
     }// </editor-fold>//GEN-END:initComponents
@@ -423,10 +459,6 @@ public class Seminario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtAutor3SemiActionPerformed
 
-    private void jCmbTutorSemiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbTutorSemiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbTutorSemiActionPerformed
-
     private void jTxtTemaSemiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTemaSemiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtTemaSemiActionPerformed
@@ -435,45 +467,276 @@ public class Seminario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtResumenSemiActionPerformed
 
-    private void jCmbMesSemiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMesSemiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbMesSemiActionPerformed
-
     private void jBtnBuscarAutSemi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAutSemi2ActionPerformed
-        // TODO add your handling code here:
+        // Buscar al segundo estudiante
+        String carnet = JOptionPane.showInputDialog(this, "Digite "
+                + "número de Carnet del Estudiante",
+                "Tutor a Buscar", JOptionPane.INFORMATION_MESSAGE);
+        //Buscar el alumno con su carnet
+        try {
+            negocio.Estudiante es = CtrlEstudiante.leerRegistro(carnet);
+
+            // Si el resultado no es NULL, entonces recuperamos el registro
+            if (es != null) {
+                //Recuperar el Id que se mandará a relacionar
+                idEst_2 = es.getIdEst();
+                this.jTxtAutor2Semi.setText(es.getNombre() + " " + es.getP_apellido()
+                        + " " + es.getS_apellido());
+            }
+
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido"
+                    + " identificar al tutor \n " + ex.getMessage()
+                    + " indicado por número de INSS",
+                    "Registro no encontrado"
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnBuscarAutSemi2ActionPerformed
 
     private void jBtnBuscarAutSemi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAutSemi1ActionPerformed
-        // TODO add your handling code here:
+        // Buscar al primer estudiante
+        String carnet = JOptionPane.showInputDialog(this, "Digite "
+                + "número de Carnet del Estudiante",
+                "Tutor a Buscar", JOptionPane.INFORMATION_MESSAGE);
+        //Buscar el Tutor de acuerdo al corre electrónco especificado
+        try {
+            negocio.Estudiante es = CtrlEstudiante.leerRegistro(carnet);
+
+            // Si el resultado no es NULL, entonces recuperamos el registro
+            if (es != null) {
+                //Recuperar el Id que se mandará a relacionar
+                idEst_1 = es.getIdEst();
+                this.jTxtAutor1Semi.setText(es.getNombre() + " " + es.getP_apellido()
+                        + " " + es.getS_apellido());
+            }
+
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido"
+                    + " identificar al tutor \n " + ex.getMessage()
+                    + " indicado por número de INSS",
+                    "Registro no encontrado"
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnBuscarAutSemi1ActionPerformed
 
     private void jBtnBuscarAutSemi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAutSemi3ActionPerformed
-        // TODO add your handling code here:
+        // Buscar al tercer estudiante
+        String carnet = JOptionPane.showInputDialog(this, "Digite "
+                + "número de Carnet del Estudiante",
+                "Tutor a Buscar", JOptionPane.INFORMATION_MESSAGE);
+        //Buscar el Tutor de acuerdo al corre electrónco especificado
+        try {
+            negocio.Estudiante es = CtrlEstudiante.leerRegistro(carnet);
+
+            // Si el resultado no es NULL, recuperamos el registro
+            if (es != null) {
+                //Recuperar el Id que se mandará a relacionar
+                idEst_3 = es.getIdEst();
+                this.jTxtAutor3Semi.setText(es.getNombre() + " " + es.getP_apellido()
+                        + " " + es.getS_apellido());
+            }
+
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido"
+                    + " identificar al tutor \n " + ex.getMessage()
+                    + " indicado por número de INSS",
+                    "Registro no encontrado"
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnBuscarAutSemi3ActionPerformed
 
     private void jCmbSemestreSemiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbSemestreSemiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCmbSemestreSemiActionPerformed
 
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // Rellenar los combobox
+        try {
+            //1. Cargar la lista de Facultades
+            for (String carrera : CtrlCarrera.listar()) {
+                this.jCmbCarreraSemi.addItem(carrera);
+            }//Fin de for
+
+            //2. Cargar la lista de departamentos
+            //for (negocio.Tutor tut : CtrlTutor.listar()) {
+            //    this.jCmbTutorSemi.addItem(tut.getNombre() + " " + tut.getP_apellido());
+            //}//Fin for departamentos            
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se ha producido una falla"
+                    + " al tratar de listar Facultades y Departamentos \n "
+                    + " registrados actualmente", "Error al cargar"
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void jBtnExaminarSemiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExaminarSemiActionPerformed
+        // Crear un diálogo para seleccionar el archivo PDF         
+        JFileChooser jf = new JFileChooser();
+        jf.setDialogTitle("Seleccionar el resumen del Seminario");
+        jf.setApproveButtonText("Aceptar");
+        jf.setMultiSelectionEnabled(false);
+        jf.setFileFilter(new FileNameExtensionFilter("Seleccionar pdf", "pdf"));
+        int result = jf.showOpenDialog(this);
+
+        //Indicar si se ha aprovado la elección de algun elemento
+        if (result == JFileChooser.APPROVE_OPTION) {
+            //Obtener el archivo seleccionado
+            File selectedFile = jf.getSelectedFile();
+            // Directorio de destino para guardar el archivo
+            String destino = System.getProperty("user.dir") + "\\Seminarios\\";
+            try {
+                // Copiar el archivo PDF al directorio de destino
+                Path rutaOrg = selectedFile.toPath();
+                Path destinoPath = Path.of(destino, selectedFile.getName());
+                Files.copy(rutaOrg, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+                this.jTxtResumenSemi.setText(destino + selectedFile.getName());
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error, no es posible "
+                        + "realizar la acción \n para corregir prueba algunas"
+                        + "de las siguientes opciones:\n "
+                        + "1. El path al directorio destino exista \n"
+                        + "2. Ha seleccionado un archivo con formato valido"
+                        + e.getMessage(), "Error al Operar", JOptionPane.ERROR_MESSAGE);
+            }
+        }//Fin
+    }//GEN-LAST:event_jBtnExaminarSemiActionPerformed
+
+    private void jCmbCarreraSemiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCmbCarreraSemiItemStateChanged
+        // Recuperar el ID de la carrera seleccionada
+        try {
+            String item = "";
+            if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+                item = (String) jCmbCarreraSemi.getSelectedItem();
+            }
+            //Buscar y asignar el id correspondiente del departamento 
+            idCarrera = CtrlCarrera.recuperarIdCarrera(item);
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Se ha producido un \n "
+                    + " error al intentar recuperar identificador " + ex.getMessage(),
+                    "Registro no encontrado", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_jCmbCarreraSemiItemStateChanged
+
+    private void jBtnBuscarTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarTutorActionPerformed
+        // Buscar Tutor mediante un INSS
+        String inss = JOptionPane.showInputDialog(this, "Digite "
+                + "número de INSS del tutor",
+                "Tutor a Buscar", JOptionPane.INFORMATION_MESSAGE);
+        //Buscar el Tutor de acuerdo al corre electrónco especificado
+        try {
+            negocio.Tutor t = CtrlTutor.leerRegistro(inss);
+            if (t != null) {
+                //Recuperar el Id que se mandará a relacionar
+                idTutor = t.getIdTut();
+                this.jTxtTutorNombre.setText(t.getNombre() + " " + t.getP_apellido()
+                        + " " + t.getS_apellido());
+            }
+
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido"
+                    + " identificar al tutor \n " + ex.getMessage()
+                    + " indicado por número de INSS",
+                    "Registro no encontrado"
+                    + "listado", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_jBtnBuscarTutorActionPerformed
+
+    private void jTxtTutorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTutorNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtTutorNombreActionPerformed
+
+    private void jBtnGuardarSemiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarSemiActionPerformed
+        // Guardar un seminario
+        try {
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Date d = jDtChFechaSeminario.getDate();
+                System.out.println(d);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = format.format(d);
+                System.out.println(fechaFormateada);
+                
+                // Preparar los datos que se guardaran del Tutor
+                int ans = CtrlSeminario.insertar_seminario(
+                        this.jTxtTemaSemi.getText(),
+                        this.jTxtResumenSemi.getText(),
+                        fechaFormateada,
+                        //this.jDtChFechaSeminario.getDate().toString(),
+                        this.idEst_1,
+                        this.idEst_2,
+                        this.idEst_3,
+                        this.idTutor,
+                        this.idCarrera,
+                        Integer.parseInt(jCmbSemestreSemi.getSelectedItem().toString()));
+
+                // Validamos si se guardo el registro
+                if (ans > 0) {
+                    JOptionPane.showMessageDialog(this, "Registro grabado con exito",
+                            "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
+                    //this.clearForm(); //Limpiar los campos del formulario
+                    //this.limpiar();
+                }//Fin de la instrucción if
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + "\n" + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_jBtnGuardarSemiActionPerformed
+
+    // Validar los campos del formulario
+    private boolean validateForm(){
+        boolean ans = true;
+        
+        if(jTxtTutorNombre.getText().isBlank()
+                || jCmbCarreraSemi.getSelectedItem() == "Seleccione"
+                || jCmbSemestreSemi.getSelectedItem() == "Seleccione"
+                || jTxtAutor1Semi.getText().isBlank()
+                || jTxtTemaSemi.getText().isBlank()
+                || jTxtResumenSemi.getText().isBlank()
+                || jDtChFechaSeminario.getDate().toString().isBlank()){
+            
+            ans = false;
+        }
+        
+        return ans;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBorrarSemi;
     private javax.swing.JButton jBtnBuscarAutSemi1;
     private javax.swing.JButton jBtnBuscarAutSemi2;
     private javax.swing.JButton jBtnBuscarAutSemi3;
+    private javax.swing.JButton jBtnBuscarTutor;
     private javax.swing.JButton jBtnExaminarSemi;
     private javax.swing.JButton jBtnGuardarSemi;
-    private javax.swing.JComboBox<String> jCmbAnioSemi;
     private javax.swing.JComboBox<String> jCmbCarreraSemi;
-    private javax.swing.JComboBox<String> jCmbDiaSemi;
-    private javax.swing.JComboBox<String> jCmbMesSemi;
-    private javax.swing.JComboBox<String> jCmbModadSemi;
     private javax.swing.JComboBox<String> jCmbSemestreSemi;
-    private javax.swing.JComboBox<String> jCmbTutorSemi;
+    private com.toedter.calendar.JDateChooser jDtChFechaSeminario;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -487,6 +750,7 @@ public class Seminario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
@@ -496,5 +760,6 @@ public class Seminario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTxtAutor3Semi;
     private javax.swing.JTextField jTxtResumenSemi;
     private javax.swing.JTextField jTxtTemaSemi;
+    private javax.swing.JTextField jTxtTutorNombre;
     // End of variables declaration//GEN-END:variables
 }

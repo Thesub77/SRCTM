@@ -1,11 +1,14 @@
 package datos;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import servicios.Conexion;
 import servicios.MS_SQLServer;
 import negocio.Evaluador;
 
 public class DB_Evaluador {
+
     // Variables de instancia
     private Evaluador eva; //Instancia de Evaluador
     private Conexion cnx; //= null; //Manejador de conexión
@@ -18,7 +21,7 @@ public class DB_Evaluador {
     public DB_Evaluador(Evaluador pt) {
         this.eva = pt;
     }
-    
+
     // Metodo para insertar un Evaluador
     public int insertar(boolean op) throws ClassNotFoundException,
             InstantiationException,
@@ -53,7 +56,7 @@ public class DB_Evaluador {
 
         return cnx.pst.executeUpdate();
     }// Fin
-    
+
     // Buscar un registro de Evaluador
     public Evaluador buscarEvaluador(String inss) throws ClassNotFoundException,
             InstantiationException,
@@ -78,58 +81,84 @@ public class DB_Evaluador {
         //Recorrer los resultados obtenidos en la consulta si los hay
         if (cnx.resultado.next()) {
             //Recuperar los valores del registro y asignar al objeto p
-            t = new Evaluador (cnx.resultado.getString("INSS_evaluador"),
+            t = new Evaluador(cnx.resultado.getString("INSS_evaluador"),
                     cnx.resultado.getString("nombre_evaluador"),
                     cnx.resultado.getString("p_apellido_evaluador"),
                     cnx.resultado.getString("s_apellido_evaluador"));
         }//Fin
-        
+
         return t; // Retornamos el objeto con los valores encontrados
     }
-    
+
     // Metodo para verificar la existencia de un registro de Evaluador
-    public boolean verificarEvaluador () throws ClassNotFoundException,
-                                  InstantiationException,
-                                  IllegalAccessException,
-                                  SQLException
-    
-    {
-       //Instancia de conexión con la base de datos
-       cnx = new MS_SQLServer ();
-       //Establecer la Sentencia SQL de consulta en la base de datos
-       String sql = "EXECUTE verificar_evaluador ?";// Pendiente aniadir el stored procedure
-       //sql += "WHERE \"codigo_inss\" = ?";
-       
+    public boolean verificarEvaluador() throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException {
+        //Instancia de conexión con la base de datos
+        cnx = new MS_SQLServer();
+        //Establecer la Sentencia SQL de consulta en la base de datos
+        String sql = "EXECUTE verificar_evaluador ?";// Pendiente aniadir el stored procedure
+        //sql += "WHERE \"codigo_inss\" = ?";
+
         cnx.pst = cnx.conexion.prepareStatement(sql);
         cnx.pst.setString(1, eva.getInss()); //Indicar el número de INSS
         cnx.resultado = cnx.pst.executeQuery();
         //Retornar el resultado obtenido en la consulta
-       return cnx.resultado.next();
+        return cnx.resultado.next();
     }//Fin
-    
+
     // Metodo para borrar un registro de Evaluador
     public boolean borrar(String inss) throws ClassNotFoundException,
             InstantiationException,
             IllegalAccessException,
             SQLException {
-        
+
         //boolean rst = false;  //Variable para indicar el proceso de la consulta
-        
         //Instancia de conexión con la base de datos
         cnx = new MS_SQLServer();
-        
+
         // Cadena que almacenara la consulta
         String sql;
 
         sql = "EXECUTE eliminar_evaluador ";
         sql += "?";
         //sql += "WHERE \"codigo_inss\" = ?";
-        
+
         //Establecer los parámetros a pasar a la consulta
         cnx.pst = cnx.conexion.prepareStatement(sql);
         cnx.pst.setString(1, inss);
-        
+
         //Retornará verdadero si hubieron registros afectados false sino es así
         return cnx.pst.executeUpdate() > 0;
+    }//Fin
+
+    // Listar Evaluadores
+    public List<Evaluador> listadoEvaluadores() throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException {
+        List<Evaluador> list = null; //Lista de instancia a retornar
+        cnx = new MS_SQLServer(); //Establecer la instancia para la conexión
+        //Consultar todos los registros que estan activo para retornarlos
+        String sql = "EXECUTE listar_evaluador";
+
+        cnx.pst = cnx.conexion.prepareStatement(sql);
+        //Ejecutar la consulta del PreparedStatement
+        cnx.resultado = cnx.pst.executeQuery();
+
+        //Verificar que se obtuvieron registros, si hay se procesan        
+        if (cnx.resultado != null) {
+            list = new ArrayList<>();//ArrayList almacen
+            while (cnx.resultado.next()) {
+                Evaluador p = new Evaluador(); //Generar instanc
+                p.setInss(cnx.resultado.getString("INSS_evaluador"));
+                p.setNombre(cnx.resultado.getString("nombre_evaluador"));
+                p.setP_apellido(cnx.resultado.getString("p_apellido_evaluador") + " " + cnx.resultado.getString("s_apellido_evaluador"));
+                list.add(p); //Agregar el resultado a la lista
+            }//Fin de la instrucción While
+        }//Fin de la instrucción if
+
+        return list;
     }//Fin
 }

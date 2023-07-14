@@ -4,6 +4,7 @@ import controlador.CtrlEvaluador;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -56,6 +57,23 @@ public class Evaluador extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setPreferredSize(new java.awt.Dimension(995, 503));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -133,7 +151,7 @@ public class Evaluador extends javax.swing.JInternalFrame {
         jBtnGuardarEvaluador.setBackground(new java.awt.Color(204, 204, 204));
         jBtnGuardarEvaluador.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarEvaluador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarEvaluador.setText("Guardar");
+        jBtnGuardarEvaluador.setText("Registrar");
         jBtnGuardarEvaluador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnGuardarEvaluador.setMaximumSize(new java.awt.Dimension(114, 30));
         jBtnGuardarEvaluador.setMinimumSize(new java.awt.Dimension(114, 30));
@@ -172,13 +190,12 @@ public class Evaluador extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jBtnGuardarEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBtnGuardarEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnBuscarEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBtnEliminarEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,29 +237,12 @@ public class Evaluador extends javax.swing.JInternalFrame {
         jPanel2.add(jTxtINSSEvaluador, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 150, 20));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Datos Evaluador");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 120, -1));
+        jLabel1.setText("Registro de Evaluadores");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 200, -1));
 
         jTblListarEvaluador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo Inss", "Nombres", "Apellidos"
@@ -251,18 +251,27 @@ public class Evaluador extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarEvaluador.setFocusable(false);
         jTblListarEvaluador.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarEvaluador.setRowHeight(25);
         jTblListarEvaluador.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarEvaluador.setShowHorizontalLines(true);
         jTblListarEvaluador.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarEvaluador);
+        if (jTblListarEvaluador.getColumnModel().getColumnCount() > 0) {
+            jTblListarEvaluador.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 450, 340));
 
@@ -285,7 +294,7 @@ public class Evaluador extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
+                .addGap(0, 2, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -401,6 +410,8 @@ public class Evaluador extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Registro grabado con exito",
                             "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
                     this.clearForm(); //Limpiar los campos del formulario
+                    this.limpiar();
+                    this.listado();
                 }//Fin
             }
 
@@ -456,6 +467,8 @@ public class Evaluador extends javax.swing.JInternalFrame {
 
                         // Limpiamos los campos del formulario
                         this.clearForm();
+                        this.limpiar();
+                        this.listado();
                     }
                 } else{
                     JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
@@ -507,6 +520,62 @@ public class Evaluador extends javax.swing.JInternalFrame {
         jBtnEliminarEvaluador.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_jBtnEliminarEvaluadorMouseExited
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        try {
+            CtrlEvaluador.listar(jTblListarEvaluador);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    // Metodo para limpiar tabla
+    private void limpiar(){
+        DefaultTableModel tb = (DefaultTableModel) jTblListarEvaluador.getModel();
+        tb.setRowCount(0);
+    }
+    
+    // Metodo para listar
+    private void listado(){
+        try {
+            CtrlEvaluador.listar(jTblListarEvaluador);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }
+    
     // Metodo para limpiar los campos del formulario
     private void clearForm() {
         this.jTxtINSSEvaluador.setText("");

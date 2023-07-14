@@ -1,6 +1,8 @@
 package datos;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import negocio.Estudiante;
 import servicios.Conexion;
 import servicios.MS_SQLServer;
@@ -33,7 +35,7 @@ public class DB_Estudiante {
         //Si op (operación) no es true se trata de un nuevo registro
         if (!op) {
             sql = "EXECUTE insertar_estudiante ";
-            sql += "?, ?, ?, ?, ?";
+            sql += "?, ?, ?, ?, ?, ?";
 
             //Preparar la consulta y establecer los valores del PreparedStatement
             cnx.pst = cnx.conexion.prepareStatement(sql);
@@ -42,6 +44,7 @@ public class DB_Estudiante {
             cnx.pst.setString(3, es.getP_apellido());
             cnx.pst.setString(4, es.getS_apellido());
             cnx.pst.setInt(5, 1);
+            cnx.pst.setInt(6, 1);
         } else {
             //La Operación se trata de una actualización de Registro
             sql = "EXECUTE actualizar_estudiante ";
@@ -80,10 +83,17 @@ public class DB_Estudiante {
         //Recorrer los resultados obtenidos en la consulta si los hay
         if (cnx.resultado.next()) {
             //Recuperar los valores del registro y asignar al objeto p
-            es = new Estudiante(cnx.resultado.getString("carnet_estudiante"),
+            /*es = new Estudiante(cnx.resultado.getString("carnet_estudiante"),
                     cnx.resultado.getString("nombre_estudiante"),
                     cnx.resultado.getString("p_apellido_estudiante"),
-                    cnx.resultado.getString("s_apellido_estudiante"));
+                    cnx.resultado.getString("s_apellido_estudiante"));*/
+            
+            es = new Estudiante();
+            es.setIdEst(cnx.resultado.getInt("id_estudiante"));
+            es.setCarnet(cnx.resultado.getString("carnet_estudiante"));
+            es.setNombre(cnx.resultado.getString("nombre_estudiante"));
+            es.setP_apellido(cnx.resultado.getString("p_apellido_estudiante"));
+            es.setS_apellido(cnx.resultado.getString("s_apellido_estudiante"));
         }//Fin
 
         return es;//Retornar el objeto con los valores encontrados
@@ -131,5 +141,37 @@ public class DB_Estudiante {
 
         //Retornará verdadero si hubieron registros afectados false sino es así
         return cnx.pst.executeUpdate() > 0;
+    }//Fin
+    
+    public List<Estudiante> listadoEstudiantes () throws ClassNotFoundException,
+                                                     InstantiationException,
+                                                     IllegalAccessException,
+                                                     SQLException
+    {
+       List<Estudiante> list = null; //Lista de instancia a retornar
+        cnx = new MS_SQLServer (); //Establecer la instancia para la conexión
+        //Consultar todos los registros que estan activo para retornarlos
+        String sql = "EXECUTE listar_estudiante";
+               //sql += " correo_institucional, funcion_laboral";
+               //sql += " FROM personal_operativo WHERE \"anulado\" <> 0";
+        
+        cnx.pst = cnx.conexion.prepareStatement(sql);
+        //Ejecutar la consulta del PreparedStatement
+        cnx.resultado = cnx.pst.executeQuery();
+        
+        //Verificar que se obtuvieron registros, si hay se procesan        
+        if (cnx.resultado != null){
+            list = new ArrayList<>();//ArrayList almacen
+            while (cnx.resultado.next()) {
+              Estudiante p = new Estudiante (); //Generar instanc
+              p.setCarnet(cnx.resultado.getString("carnet_estudiante"));
+              p.setNombre(cnx.resultado.getString("nombre_estudiante"));
+              p.setP_apellido(cnx.resultado.getString("p_apellido_estudiante") + " " + cnx.resultado.getString("s_apellido_estudiante"));
+              //p.setS_apellido(cnx.resultado.getString("s_apellido_tutor"));
+              list.add(p); //Agregar el resultado a la lista
+            }//Fin de la instrucción While
+        }//Fin de la instrucción if
+        
+        return list;
     }//Fin
 }

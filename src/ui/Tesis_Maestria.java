@@ -37,8 +37,6 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jBtnBuscarAutTesMaes = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jCmbModadTesMaes = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jCmbTutorTesMaes = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
@@ -54,9 +52,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
         jTxtResumenTesMaes = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         jBtnExaminarTesMaes = new javax.swing.JButton();
-        jCmbDiaTesMaes = new javax.swing.JComboBox<>();
-        jCmbMesTesMaes = new javax.swing.JComboBox<>();
-        jCmbAnioTesMaes = new javax.swing.JComboBox<>();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -99,7 +95,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
 
         jBtnGuardarTesMaes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarTesMaes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarTesMaes.setText("Guardar");
+        jBtnGuardarTesMaes.setText("Registrar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -110,7 +106,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
                 .addComponent(jBtnGuardarTesMaes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnBorrarTesMaes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,52 +145,44 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setText("Modalidad");
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 87, 22));
-
-        jCmbModadTesMaes.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbModadTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " ", " " }));
-        jPanel6.add(jCmbModadTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 233, 32));
-
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Tutor");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 15, 50, 25));
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 50, 25));
 
         jCmbTutorTesMaes.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbTutorTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbTutorTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbTutorTesMaes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbTutorTesMaesActionPerformed(evt);
             }
         });
-        jPanel6.add(jCmbTutorTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 10, 240, 32));
+        jPanel6.add(jCmbTutorTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 240, 32));
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel16.setText("Asesor");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 15, 50, 25));
+        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 50, 25));
 
         jCmbAsesorTesMaes.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbAsesorTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbAsesorTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbAsesorTesMaes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbAsesorTesMaesActionPerformed(evt);
             }
         });
-        jPanel6.add(jCmbAsesorTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 240, 32));
+        jPanel6.add(jCmbAsesorTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 240, 32));
 
         jCmbSemestreGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbSemestreGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1", "2", " ", " " }));
+        jCmbSemestreGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1", "2" }));
         jCmbSemestreGra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbSemestreGraActionPerformed(evt);
             }
         });
-        jPanel6.add(jCmbSemestreGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 100, 32));
+        jPanel6.add(jCmbSemestreGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 10, 100, 32));
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setText("Semestre");
-        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 15, 70, 25));
+        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 70, 25));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1100, 50));
 
@@ -215,7 +203,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
                 jTxtTemaTesMaesActionPerformed(evt);
             }
         });
-        jPanel7.add(jTxtTemaTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 16, 266, 19));
+        jPanel7.add(jTxtTemaTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 266, 19));
         jPanel7.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 34, 266, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -235,30 +223,9 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
         jBtnExaminarTesMaes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
         jBtnExaminarTesMaes.setText("Examinar");
         jPanel7.add(jBtnExaminarTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 135, -1, -1));
+        jPanel7.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 260, -1));
 
-        jCmbDiaTesMaes.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbDiaTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
-        jCmbDiaTesMaes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbDiaTesMaesActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jCmbDiaTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 59, -1, -1));
-
-        jCmbMesTesMaes.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbMesTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
-        jCmbMesTesMaes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbMesTesMaesActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jCmbMesTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 59, -1, -1));
-
-        jCmbAnioTesMaes.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbAnioTesMaes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año" }));
-        jPanel7.add(jCmbAnioTesMaes, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 59, -1, -1));
-
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 360, 180));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 360, 180));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
@@ -349,7 +316,7 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 450, 150));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 1240, 490));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -369,10 +336,6 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
     private void jTxtResumenTesMaesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtResumenTesMaesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtResumenTesMaesActionPerformed
-
-    private void jCmbMesTesMaesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMesTesMaesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbMesTesMaesActionPerformed
 
     private void jTxtAutorTesMaesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAutorTesMaesActionPerformed
         // TODO add your handling code here:
@@ -410,10 +373,6 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCmbSemestreGraActionPerformed
 
-    private void jCmbDiaTesMaesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbDiaTesMaesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbDiaTesMaesActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBorrarTesMaes;
@@ -426,19 +385,15 @@ public class Tesis_Maestria extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckPresidente;
     private javax.swing.JCheckBox jCheckSecretario;
     private javax.swing.JCheckBox jCheckVocal;
-    private javax.swing.JComboBox<String> jCmbAnioTesMaes;
     private javax.swing.JComboBox<String> jCmbAsesorTesMaes;
-    private javax.swing.JComboBox<String> jCmbDiaTesMaes;
-    private javax.swing.JComboBox<String> jCmbMesTesMaes;
-    private javax.swing.JComboBox<String> jCmbModadTesMaes;
     private javax.swing.JComboBox<String> jCmbSemestreGra;
     private javax.swing.JComboBox<String> jCmbTutorTesMaes;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

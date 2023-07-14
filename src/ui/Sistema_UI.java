@@ -16,14 +16,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Sistema_UI extends javax.swing.JFrame {
-    
- 
+
+    //negocio.Usuario user;
+    //protected int idUsuaroActual;
     public Sistema_UI() throws IOException {
         initComponents();
+        //user = new negocio.Usuario();
+        //this.idUsuaroActual = 0;
         dskPanelMDI.setBorder(new ImagenFondo());
         //Maximizar la ventana de inicio
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-       
+
     }
 
     /**
@@ -41,7 +44,6 @@ public class Sistema_UI extends javax.swing.JFrame {
         jItemCatalogo = new javax.swing.JMenu();
         Tutor = new javax.swing.JMenuItem();
         Evaluador = new javax.swing.JMenuItem();
-        Asesor = new javax.swing.JMenuItem();
         Estudiante = new javax.swing.JMenuItem();
         Empleado = new javax.swing.JMenuItem();
         jMnuEstatico = new javax.swing.JMenuItem();
@@ -53,7 +55,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         itemTesisMaestria = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         ItemConsulta = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuReportes = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -65,7 +67,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         jMnu_Sesion = new javax.swing.JMenu();
         jItem_Exit = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMnuInicioSesion = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -87,6 +89,8 @@ public class Sistema_UI extends javax.swing.JFrame {
         jItemCatalogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/catalogo.png"))); // NOI18N
         jItemCatalogo.setMnemonic('f');
         jItemCatalogo.setText("Catálogo");
+        jItemCatalogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jItemCatalogo.setEnabled(false);
 
         Tutor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Tutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tutor.png"))); // NOI18N
@@ -112,21 +116,10 @@ public class Sistema_UI extends javax.swing.JFrame {
         });
         jItemCatalogo.add(Evaluador);
 
-        Asesor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Asesor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/asesoramiento-online.png"))); // NOI18N
-        Asesor.setMnemonic('a');
-        Asesor.setText("Asesor");
-        Asesor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Asesor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AsesorActionPerformed(evt);
-            }
-        });
-        jItemCatalogo.add(Asesor);
-
         Estudiante.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Estudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/graduated.png"))); // NOI18N
         Estudiante.setText("Estudiante");
+        Estudiante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Estudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EstudianteActionPerformed(evt);
@@ -137,6 +130,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         Empleado.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Empleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/division.png"))); // NOI18N
         Empleado.setText("Empleado");
+        Empleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Empleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EmpleadoActionPerformed(evt);
@@ -147,6 +141,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         jMnuEstatico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMnuEstatico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exam.png"))); // NOI18N
         jMnuEstatico.setText("Carrera");
+        jMnuEstatico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMnuEstatico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuEstaticoActionPerformed(evt);
@@ -157,6 +152,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         jMenuItem3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/education.png"))); // NOI18N
         jMenuItem3.setText("Modalidad de graduación");
+        jMenuItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -169,6 +165,8 @@ public class Sistema_UI extends javax.swing.JFrame {
         jitemGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/verify.png"))); // NOI18N
         jitemGuardar.setMnemonic('e');
         jitemGuardar.setText("Registros");
+        jitemGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jitemGuardar.setEnabled(false);
         jitemGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jitemGuardarMouseClicked(evt);
@@ -178,6 +176,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         itemProtocolo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         itemProtocolo.setMnemonic('t');
         itemProtocolo.setText("Protocolo");
+        itemProtocolo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         itemProtocolo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemProtocoloActionPerformed(evt);
@@ -187,7 +186,8 @@ public class Sistema_UI extends javax.swing.JFrame {
 
         itemTesis.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         itemTesis.setMnemonic('y');
-        itemTesis.setText("Tesis de grado");
+        itemTesis.setText("Monografia");
+        itemTesis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         itemTesis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemTesisActionPerformed(evt);
@@ -198,6 +198,7 @@ public class Sistema_UI extends javax.swing.JFrame {
         Seminario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Seminario.setMnemonic('p');
         Seminario.setText("Seminario");
+        Seminario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Seminario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SeminarioActionPerformed(evt);
@@ -206,7 +207,8 @@ public class Sistema_UI extends javax.swing.JFrame {
         jitemGuardar.add(Seminario);
 
         itemTesisMaestria.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        itemTesisMaestria.setText("Tesis de maestria");
+        itemTesisMaestria.setText("Tesis");
+        itemTesisMaestria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         itemTesisMaestria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemTesisMaestriaActionPerformed(evt);
@@ -218,6 +220,7 @@ public class Sistema_UI extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/a-la-vista.png"))); // NOI18N
         jMenu1.setText("Consultas");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
@@ -226,6 +229,7 @@ public class Sistema_UI extends javax.swing.JFrame {
 
         ItemConsulta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         ItemConsulta.setText("Consulta");
+        ItemConsulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ItemConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ItemConsultaActionPerformed(evt);
@@ -235,58 +239,67 @@ public class Sistema_UI extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reporte.png"))); // NOI18N
-        jMenu3.setText("Reportes ");
+        jMenuReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reporte.png"))); // NOI18N
+        jMenuReportes.setText("Reportes ");
+        jMenuReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuReportes.setEnabled(false);
 
         jMenuItem8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem8.setText("Protocolo Maestrias");
+        jMenuItem8.setText("Seminarios por carrera");
+        jMenuItem8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem8);
+        jMenuReportes.add(jMenuItem8);
 
         jMenuItem6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMenuItem6.setText("Protocolos por semestres");
+        jMenuItem6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        jMenuReportes.add(jMenuItem6);
 
         jMenuItem7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem7.setText("Protocolos por carreras ");
+        jMenuItem7.setText("Protocolos por carrera");
+        jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenuReportes.add(jMenuItem7);
 
         jMenuItem9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem9.setText("Tesis monográficas inscritas por carrera.");
+        jMenuItem9.setText("Tesis monográficas inscritas por carrera");
+        jMenuItem9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        jMenuReportes.add(jMenuItem9);
 
         jMenuItem10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMenuItem10.setText("Tutorias");
+        jMenuItem10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem10);
+        jMenuReportes.add(jMenuItem10);
 
-        menuBar.add(jMenu3);
+        menuBar.add(jMenuReportes);
 
         jmnu_Configuracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/settings.png"))); // NOI18N
         jmnu_Configuracion.setText("Configuración");
+        jmnu_Configuracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jmnu_Configuracion.setEnabled(false);
         jmnu_Configuracion.add(jSep_BaseDatos);
 
         jItem_ConfDB.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -317,6 +330,7 @@ public class Sistema_UI extends javax.swing.JFrame {
 
         jMenuItem5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMenuItem5.setText("Usuario");
+        jMenuItem5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -324,14 +338,15 @@ public class Sistema_UI extends javax.swing.JFrame {
         });
         jMnu_Sesion.add(jMenuItem5);
 
-        jMenuItem4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem4.setText("Login");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMnuInicioSesion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jMnuInicioSesion.setText("Iniciar sesión");
+        jMnuInicioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMnuInicioSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMnuInicioSesionActionPerformed(evt);
             }
         });
-        jMnu_Sesion.add(jMenuItem4);
+        jMnu_Sesion.add(jMnuInicioSesion);
 
         menuBar.add(jMnu_Sesion);
 
@@ -367,7 +382,7 @@ public class Sistema_UI extends javax.swing.JFrame {
 
         Evaluador nuevoEvaluador;
         nuevoEvaluador = new Evaluador(); //Crear la instancia
-        nuevoEvaluador.setLocation(120,100);//indica las coordenadas donde se ubicara el frm
+        nuevoEvaluador.setLocation(120, 100);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoEvaluador); //Agregar al Panel
         nuevoEvaluador.show(); //Mostrar el formulario
 
@@ -376,15 +391,15 @@ public class Sistema_UI extends javax.swing.JFrame {
     private void SeminarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeminarioActionPerformed
         Seminario nuevoSemi;
         nuevoSemi = new Seminario(); //Crear la instancia
-        nuevoSemi.setLocation(35,85);//indica las coordenadas donde se ubicara el frm
+        nuevoSemi.setLocation(35, 85);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoSemi); //Agregar al Panel
         nuevoSemi.show(); //Mostrar el formulario
     }//GEN-LAST:event_SeminarioActionPerformed
 
     private void itemTesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTesisActionPerformed
-         Tesis_Monografica nuevoGrado;
+        Tesis_Monografica nuevoGrado;
         nuevoGrado = new Tesis_Monografica(); //Crear la instancia
-        nuevoGrado.setLocation(8,85);//indica las coordenadas donde se ubicara el frm
+        nuevoGrado.setLocation(8, 85);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoGrado); //Agregar al Panel
         nuevoGrado.show(); //Mostrar el formulario
     }//GEN-LAST:event_itemTesisActionPerformed
@@ -393,40 +408,30 @@ public class Sistema_UI extends javax.swing.JFrame {
         // TODO add your handling code here:
         Protocolo nuevoProtocolo;
         nuevoProtocolo = new Protocolo(); //Crear la instancia
-        nuevoProtocolo.setLocation(45,85);//indica las coordenadas donde se ubicara el frm
+        nuevoProtocolo.setLocation(45, 85);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoProtocolo); //Agregar al Panel
         nuevoProtocolo.show(); //Mostrar el formulario
 
-       
+
     }//GEN-LAST:event_itemProtocoloActionPerformed
 
     private void TutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TutorActionPerformed
 
         Tutor nuevoTutor;
         nuevoTutor = new Tutor(); //Crear la instancia
-        nuevoTutor.setLocation(120,100); //indica las coordenadas donde se ubicara el frm
+        nuevoTutor.setLocation(120, 100); //indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoTutor); //Agregar al Panel
         nuevoTutor.show(); //Mostrar el formulario
 
     }//GEN-LAST:event_TutorActionPerformed
 
-    private void AsesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsesorActionPerformed
-         Asesor nuevoAsesor;
-        nuevoAsesor = new Asesor(); //Crear la instancia
-        nuevoAsesor.setLocation(120,100);//indica las coordenadas donde se ubicara el frm
-        this.dskPanelMDI.add(nuevoAsesor); //Agregar al Panel
-        nuevoAsesor.show(); //Mostrar el formulario
-
-    }//GEN-LAST:event_AsesorActionPerformed
-
     private void itemTesisMaestriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTesisMaestriaActionPerformed
         Tesis_Maestria nuevaMaestria;
         nuevaMaestria = new Tesis_Maestria(); //Crear la instancia
-        nuevaMaestria.setLocation(90,100);//indica las coordenadas donde se ubicara el frm
+        nuevaMaestria.setLocation(90, 100);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevaMaestria); //Agregar al Panel
         nuevaMaestria.show(); //Mostrar el formulario
 
-        
 
     }//GEN-LAST:event_itemTesisMaestriaActionPerformed
 
@@ -437,30 +442,30 @@ public class Sistema_UI extends javax.swing.JFrame {
     private void EstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstudianteActionPerformed
         Estudiante nuevoEstu;
         nuevoEstu = new Estudiante(); //Crear la instancia
-        nuevoEstu.setLocation(120,100);//indica las coordenadas donde se ubicara el frm
+        nuevoEstu.setLocation(120, 100);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoEstu); //Agregar al Panel
         nuevoEstu.show(); //Mostrar el formulario   
     }//GEN-LAST:event_EstudianteActionPerformed
 
     private void EmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpleadoActionPerformed
-         Empleado nuevoEmp;
+        Empleado nuevoEmp;
         nuevoEmp = new Empleado(); //Crear la instancia
-        nuevoEmp.setLocation(120,100);//indica las coordenadas donde se ubicara el frm
+        nuevoEmp.setLocation(120, 100);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoEmp); //Agregar al Panel
         nuevoEmp.show(); //Mostrar el formulario
-        
+
     }//GEN-LAST:event_EmpleadoActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-               
-        
+
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void ItemConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemConsultaActionPerformed
         // TODO add your handling code here:
         Consultas nuevoConsulta;
         nuevoConsulta = new Consultas(); //Crear la instancia
-        nuevoConsulta.setLocation(25,45);//indica las coordenadas donde se ubicara el frm
+        nuevoConsulta.setLocation(25, 45);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoConsulta); //Agregar al Panel
         nuevoConsulta.show(); //Mostrar el formulario
     }//GEN-LAST:event_ItemConsultaActionPerformed
@@ -469,56 +474,71 @@ public class Sistema_UI extends javax.swing.JFrame {
         // TODO add your handling code here:
         Carrera nuevoCarrera;
         nuevoCarrera = new Carrera(); //Crear la instancia
-        nuevoCarrera.setLocation(5,0);//indica las coordenadas donde se ubicara el frm
+        nuevoCarrera.setLocation(5, 0);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoCarrera); //Agregar al Panel
         nuevoCarrera.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMnuEstaticoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-         ModalidadGraduacion nuevaMod;
+        ModalidadGraduacion nuevaMod;
         nuevaMod = new ModalidadGraduacion(); //Crear la instancia
-        nuevaMod.setLocation(5,0);//indica las coordenadas donde se ubicara el frm
+        nuevaMod.setLocation(5, 0);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevaMod); //Agregar al Panel
         nuevaMod.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        Usuario nuevoUser;
-        nuevoUser = new Usuario(); //Crear la instancia
-        nuevoUser.setLocation(50,50);//indica las coordenadas donde se ubicara el frm
+        ui.Usuario nuevoUser;
+        nuevoUser = new ui.Usuario(); //Crear la instancia
+        nuevoUser.setLocation(50, 50);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoUser); //Agregar al Panel
         nuevoUser.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-         Login nuevoLogin;
-        nuevoLogin = new Login(); //Crear la instancia
-        nuevoLogin.setLocation(50,50);//indica las coordenadas donde se ubicara el frm
-        this.dskPanelMDI.add(nuevoLogin); //Agregar al Panel
-        nuevoLogin.show(); //Mostrar el formulario
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jMnuInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuInicioSesionActionPerformed
+        if (Sistema_UI.jMnuInicioSesion.getText().equals("Cerrar sesión")) {
+            negocio.Usuario user = negocio.Usuario.getInstance();
+            user.setIdUser(0);
+            user.setIdEmpleado(0);
+            user.setCorreo("");
+            user.setContrasenia("");
+            jmnu_Configuracion.setEnabled(false);
+            jMenuReportes.setEnabled(false);
+            jItemCatalogo.setEnabled(false);
+            jitemGuardar.setEnabled(false);
+            jMnuInicioSesion.setText("Iniciar sesión");
+
+        } else {
+            Login nuevoLogin;
+            nuevoLogin = new Login(); //Crear la instancia
+            nuevoLogin.setLocation(50, 50);//indica las coordenadas donde se ubicara el frm
+            this.dskPanelMDI.add(nuevoLogin); //Agregar al Panel
+            nuevoLogin.show(); //Mostrar el formulario
+        }
+
+    }//GEN-LAST:event_jMnuInicioSesionActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-          ReporteSemestre nuevoSemestre;
+        ReporteSemestre nuevoSemestre;
         nuevoSemestre = new ReporteSemestre(); //Crear la instancia
-        nuevoSemestre.setLocation(175,30);//indica las coordenadas donde se ubicara el frm
+        nuevoSemestre.setLocation(175, 30);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoSemestre); //Agregar al Panel
         nuevoSemestre.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-         ReporteGrado nuevogrado;
+        ReporteGrado nuevogrado;
         nuevogrado = new ReporteGrado(); //Crear la instancia
-        nuevogrado.setLocation(175,30);//indica las coordenadas donde se ubicara el frm
+        nuevogrado.setLocation(175, 30);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevogrado); //Agregar al Panel
         nuevogrado.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-         ReporteCarrera nuevoCarrera;
+        ReporteCarrera nuevoCarrera;
         nuevoCarrera = new ReporteCarrera(); //Crear la instancia
-        nuevoCarrera.setLocation(175,30);//indica las coordenadas donde se ubicara el frm
+        nuevoCarrera.setLocation(175, 30);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoCarrera); //Agregar al Panel
         nuevoCarrera.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -526,19 +546,35 @@ public class Sistema_UI extends javax.swing.JFrame {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         ReporteMonografia nuevoMono;
         nuevoMono = new ReporteMonografia(); //Crear la instancia
-        nuevoMono.setLocation(175,30);//indica las coordenadas donde se ubicara el frm
+        nuevoMono.setLocation(175, 30);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoMono); //Agregar al Panel
         nuevoMono.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-         ReporteTutor nuevoTutor;
+        ReporteTutor nuevoTutor;
         nuevoTutor = new ReporteTutor(); //Crear la instancia
-        nuevoTutor.setLocation(175,30);//indica las coordenadas donde se ubicara el frm
+        nuevoTutor.setLocation(175, 30);//indica las coordenadas donde se ubicara el frm
         this.dskPanelMDI.add(nuevoTutor); //Agregar al Panel
         nuevoTutor.show(); //Mostrar el formulario
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    public void InicioSesionVerificacion() {
+        negocio.Usuario user = negocio.Usuario.getInstance();
+        try {
+            ///int idUsuaroActual = user.getIdUser();
+
+            System.out.println(user.getIdUser());
+
+            if (user.getIdUser() != 0) {
+                jItemCatalogo.setEnabled(true);
+            }
+
+        } catch (Exception error) {
+
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -577,7 +613,7 @@ public class Sistema_UI extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         //Preparar la carga de archivos de configuración
         try {
 
@@ -599,10 +635,10 @@ public class Sistema_UI extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }//Fin catch)
+
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Asesor;
     private javax.swing.JMenuItem Empleado;
     private javax.swing.JMenuItem Estudiante;
     private javax.swing.JMenuItem Evaluador;
@@ -613,25 +649,25 @@ public class Sistema_UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemProtocolo;
     private javax.swing.JMenuItem itemTesis;
     private javax.swing.JMenuItem itemTesisMaestria;
-    private javax.swing.JMenu jItemCatalogo;
+    public static javax.swing.JMenu jItemCatalogo;
     private javax.swing.JMenuItem jItem_ConfDB;
     private javax.swing.JMenuItem jItem_Exit;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    public static javax.swing.JMenu jMenuReportes;
     private javax.swing.JMenuItem jMnuEstatico;
+    public static javax.swing.JMenuItem jMnuInicioSesion;
     private javax.swing.JMenu jMnu_Sesion;
     private javax.swing.JPopupMenu.Separator jSep_BaseDatos;
-    private javax.swing.JMenu jitemGuardar;
-    private javax.swing.JMenu jmnu_Configuracion;
+    public static javax.swing.JMenu jitemGuardar;
+    public static javax.swing.JMenu jmnu_Configuracion;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

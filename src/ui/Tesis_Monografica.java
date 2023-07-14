@@ -45,8 +45,6 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
         jCheckSecretarioGra = new javax.swing.JCheckBox();
         jCheckVocalGra = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jCmbModalidadGra = new javax.swing.JComboBox<>();
         jCmbCarreraGra = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -64,9 +62,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
         jTxtResumenGra = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         jBtnExaminarGra = new javax.swing.JButton();
-        jCmbDiaGra = new javax.swing.JComboBox<>();
-        jCmbMesGra = new javax.swing.JComboBox<>();
-        jCmbAnioGra = new javax.swing.JComboBox<>();
+        JDtChsFecha_monografia = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -105,7 +101,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
 
         jBtnGuardarGra.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarGra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarGra.setText("Guardar");
+        jBtnGuardarGra.setText("Registrar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -116,7 +112,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
                 .addComponent(jBtnGuardarGra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnBorrarGra)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +124,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31))
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 260, 60));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 270, 60));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Evaluadores"));
@@ -205,61 +201,47 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setText("Modalidad");
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 70, 22));
-
-        jCmbModalidadGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbModalidadGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Seminario", "Tesis Monografica", " ", " ", " " }));
-        jCmbModalidadGra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbModalidadGraActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jCmbModalidadGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 140, 32));
-
         jCmbCarreraGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbCarreraGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Ing en sistemas de informacion", " ", " " }));
-        jCmbCarreraGra.setSelectedIndex(1);
+        jCmbCarreraGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbCarreraGra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbCarreraGraActionPerformed(evt);
             }
         });
-        jPanel6.add(jCmbCarreraGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 210, 32));
+        jPanel6.add(jCmbCarreraGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 210, 32));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Carrera");
-        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 70, -1));
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Tutor");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 15, 40, 25));
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 40, 25));
 
         jCmbTutorPGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbTutorPGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbTutorPGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbTutorPGra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbTutorPGraActionPerformed(evt);
             }
         });
-        jPanel6.add(jCmbTutorPGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 240, 32));
+        jPanel6.add(jCmbTutorPGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 240, 32));
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel16.setText("Semestre");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 15, 70, 25));
+        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, 70, 25));
 
         jCmbAsesorGra1.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbAsesorGra1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " " }));
+        jCmbAsesorGra1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         jCmbAsesorGra1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbAsesorGra1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jCmbAsesorGra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 200, 32));
+        jPanel6.add(jCmbAsesorGra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 200, 32));
 
         jCmbSemestreGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbSemestreGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione ", "1", "2", " " }));
+        jCmbSemestreGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione ", "1", "2" }));
         jCmbSemestreGra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCmbSemestreGraActionPerformed(evt);
@@ -269,7 +251,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setText("Asesor");
-        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 15, 50, 25));
+        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 50, 25));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1250, 50));
 
@@ -278,7 +260,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Tema");
-        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 45, -1));
+        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 45, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Resumen");
@@ -310,25 +292,9 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
         jBtnExaminarGra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
         jBtnExaminarGra.setText("Examinar");
         jPanel7.add(jBtnExaminarGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
+        jPanel7.add(JDtChsFecha_monografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 260, -1));
 
-        jCmbDiaGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbDiaGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
-        jPanel7.add(jCmbDiaGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
-
-        jCmbMesGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbMesGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
-        jCmbMesGra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCmbMesGraActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jCmbMesGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
-        jCmbAnioGra.setBackground(new java.awt.Color(204, 204, 204));
-        jCmbAnioGra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año" }));
-        jPanel7.add(jCmbAnioGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
-
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, 180));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 360, 180));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo Departamento.png"))); // NOI18N
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
@@ -342,7 +308,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Registro tesis monográfica");
+        jLabel15.setText("Registro de Monografias");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1320, 40));
@@ -443,10 +409,6 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnBuscarEvaGra2ActionPerformed
 
-    private void jCmbModalidadGraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbModalidadGraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbModalidadGraActionPerformed
-
     private void jCmbCarreraGraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbCarreraGraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCmbCarreraGraActionPerformed
@@ -466,10 +428,6 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
     private void jTxtResumenGraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtResumenGraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtResumenGraActionPerformed
-
-    private void jCmbMesGraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbMesGraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCmbMesGraActionPerformed
 
     private void jTxtAutor2Gra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAutor2Gra1ActionPerformed
         // TODO add your handling code here:
@@ -501,6 +459,7 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser JDtChsFecha_monografia;
     private javax.swing.JButton jBtnBorrarGra;
     private javax.swing.JButton jBtnBuscarAutGra1;
     private javax.swing.JButton jBtnBuscarAutGra2;
@@ -513,12 +472,8 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckPresidenteGra;
     private javax.swing.JCheckBox jCheckSecretarioGra;
     private javax.swing.JCheckBox jCheckVocalGra;
-    private javax.swing.JComboBox<String> jCmbAnioGra;
     private javax.swing.JComboBox<String> jCmbAsesorGra1;
     private javax.swing.JComboBox<String> jCmbCarreraGra;
-    private javax.swing.JComboBox<String> jCmbDiaGra;
-    private javax.swing.JComboBox<String> jCmbMesGra;
-    private javax.swing.JComboBox<String> jCmbModalidadGra;
     private javax.swing.JComboBox<String> jCmbSemestreGra;
     private javax.swing.JComboBox<String> jCmbTutorPGra;
     private javax.swing.JLabel jLabel11;
@@ -526,7 +481,6 @@ public class Tesis_Monografica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

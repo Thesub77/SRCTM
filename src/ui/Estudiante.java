@@ -8,6 +8,7 @@ import controlador.CtrlEstudiante;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -61,6 +62,23 @@ public class Estudiante extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(995, 503));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,7 +156,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jBtnGuardarEstu.setBackground(new java.awt.Color(204, 204, 204));
         jBtnGuardarEstu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBtnGuardarEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save_icon-icons.com_73702.png"))); // NOI18N
-        jBtnGuardarEstu.setText("Guardar");
+        jBtnGuardarEstu.setText("Registrar");
         jBtnGuardarEstu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnGuardarEstu.setMaximumSize(new java.awt.Dimension(107, 30));
         jBtnGuardarEstu.setMinimumSize(new java.awt.Dimension(107, 30));
@@ -172,13 +190,12 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jBtnGuardarEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBtnGuardarEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBtnBuscarEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBtnEliminarEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,29 +237,12 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.add(jTxtINSSEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 150, 20));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Datos Estudiante");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 17, 120, 20));
+        jLabel1.setText("Registro de Estudiantes");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 180, 20));
 
         jTblListarEstudiante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo Inss", "Nombres", "Apellidos"
@@ -251,18 +251,27 @@ public class Estudiante extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarEstudiante.setFocusable(false);
         jTblListarEstudiante.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarEstudiante.setRowHeight(25);
         jTblListarEstudiante.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarEstudiante.setShowHorizontalLines(true);
         jTblListarEstudiante.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarEstudiante);
+        if (jTblListarEstudiante.getColumnModel().getColumnCount() > 0) {
+            jTblListarEstudiante.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 450, 360));
 
@@ -285,7 +294,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -296,21 +305,15 @@ public class Estudiante extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 983, Short.MAX_VALUE)
+            .addGap(0, 989, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 494, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
         );
 
         pack();
@@ -415,6 +418,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Registro grabado con exito",
                             "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
                     this.clearForm(); //Limpiar los campos del formulario
+                    this.limpiar();
+                    this.listado();
                 }//Fin de la instrucción if
             }
 
@@ -478,6 +483,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
                         // Limpiamos los campos del formulario
                         this.clearForm();
+                        this.limpiar();
+                        this.listado();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "El registro que desea eliminar no existe "
@@ -518,6 +525,61 @@ public class Estudiante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtINSSEstuActionPerformed
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        try {
+            CtrlEstudiante.listar(jTblListarEstudiante);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    // Metodo para limpiar tabla
+    private void limpiar(){
+        DefaultTableModel tb = (DefaultTableModel) jTblListarEstudiante.getModel();
+        tb.setRowCount(0);
+    }
+    
+    // Metodo para listar
+    private void listado(){
+        try {
+            CtrlEstudiante.listar(jTblListarEstudiante);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }
     // Metodo para limpiar los campos del formulario
     private void clearForm() {
         this.jTxtINSSEstu.setText("");

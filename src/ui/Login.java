@@ -4,6 +4,13 @@
  */
 package ui;
 
+import controlador.CtrlUsuario;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell Latitude 7490
@@ -107,13 +114,81 @@ public class Login extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIniciarActionPerformed
-        // TODO add your handling code here:
+        // Iniciar sesion
+        try {
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                //CtrlTutor.listar(jTblListarTutor);
+            } else {
+                String correo = txtUsuario.getText();
+
+                negocio.Usuario user = CtrlUsuario.iniciarSesion(correo);
+
+                if (user != null) {
+                    String pass = jPswContrasenia.getText();
+                    if (pass.equals(user.getContrasenia())) {
+                        JOptionPane.showMessageDialog(this, "Inicio de sesion exitoso ",
+                                "Inicio de sesion", JOptionPane.INFORMATION_MESSAGE);
+                        System.out.println(user.getIdUser());
+                        System.out.println(user.getCorreo());
+                        System.out.println(user.getContrasenia());
+                        System.out.println(user.getIdEmp());
+                        //Sistema_UI n = new Sistema_UI();
+                        //n.InicioSesionVerificacion();
+                        Sistema_UI.jItemCatalogo.setEnabled(true);
+                        Sistema_UI.jitemGuardar.setEnabled(true);
+                        Sistema_UI.jMenuReportes.setEnabled(true);
+                        Sistema_UI.jmnu_Configuracion.setEnabled(true);
+                        Sistema_UI.jMnuInicioSesion.setText("Cerrar sesión");
+                        
+                        this.dispose();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al iniciar sesion "
+                            + "la credencial no ha sido encontrada",
+                            "Cuenta de usuario no encontrada", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + ex.getSQLState(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin */
+
     }//GEN-LAST:event_jBtnIniciarActionPerformed
 
     private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jBtnSalirActionPerformed
 
+    // Metodo para validar que los campos del formulario sean rellenados
+    private boolean validateForm() {
+        boolean t = true;
+
+        if (txtUsuario.getText().isBlank()
+                || jPswContrasenia.getText().isBlank()) {
+
+            // Si alguno de los campos esta vacio retorna falso
+            t = false;
+        }
+
+        return t;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnIniciar;

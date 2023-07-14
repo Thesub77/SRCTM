@@ -2,10 +2,13 @@ package negocio;
 
 import datos.DB_Estudiante;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Estudiante extends Persona {
 
     // Variables de instancia
+    protected int idEst;
     protected String carnet;
 
     // Constructores
@@ -22,8 +25,16 @@ public class Estudiante extends Persona {
         this.p_apellido = p_apellido;
         this.s_apellido = s_apellido;
     }
-
+    
     // Metodos GET Y SET
+    public int getIdEst() {
+        return idEst;
+    }
+
+    public void setIdEst(int idEst) {    
+        this.idEst = idEst;
+    }
+
     public String getCarnet() {
         return carnet;
     }
@@ -97,4 +108,15 @@ public class Estudiante extends Persona {
         DB_Estudiante bdEs = new DB_Estudiante();
         return bdEs.borrar(carnet);
     }
+    
+    // Metodo para listar Tutores
+    public List<Estudiante> leerEstudiantes () throws 
+                                                   ClassNotFoundException,
+                                                   InstantiationException,
+                                                   IllegalAccessException,
+                                                   SQLException
+    {
+        DB_Estudiante bdTut = new DB_Estudiante ();
+        return (ArrayList) bdTut.listadoEstudiantes();
+    }//Fin
 }

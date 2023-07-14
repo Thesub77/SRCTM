@@ -4,6 +4,10 @@
  */
 package ui;
 
+import controlador.CtrlReportes;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell Latitude 7490
@@ -41,6 +45,23 @@ public class ReporteGrado extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,8 +73,8 @@ public class ReporteGrado extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 200, 110));
 
         JlblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        JlblTitulo.setText("Reporte de protocolos aprobados por grado\n\n");
-        jPanel1.add(JlblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 310, -1));
+        JlblTitulo.setText("Seminarios por Carrera");
+        jPanel1.add(JlblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Departamento de computación");
@@ -61,42 +82,31 @@ public class ReporteGrado extends javax.swing.JInternalFrame {
 
         jTblListarReporteGrado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Grado", "Titulo investigacion", "Fecha defensa"
+                "Carrera", "Titulo investigacion", "Fecha defensa"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarReporteGrado.setFocusable(false);
         jTblListarReporteGrado.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarReporteGrado.setRowHeight(25);
-        jTblListarReporteGrado.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        jTblListarReporteGrado.setShowHorizontalLines(true);
+        jTblListarReporteGrado.setSelectionBackground(new java.awt.Color(0, 51, 102));
         jTblListarReporteGrado.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarReporteGrado);
 
@@ -129,6 +139,31 @@ public class ReporteGrado extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // RELLENAR TABLA DE REPORTES CON LA LISTA DE SEMINARIOS EXISTENTES ORDENADOS POR CARRERA
+        try {
+            CtrlReportes.listar(jTblListarReporteGrado);
+        }
+         catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería", 
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia", 
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                  + "intentar utilizar \n la librería o instancia para guardar", 
+                  "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                  + "el manejo de la solicitud \n al intentar registrar datos "
+                  + ex.getSQLState(), 
+                  "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        }//Fin
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

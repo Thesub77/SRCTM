@@ -4,7 +4,11 @@
  */
 package ui;
 
+import controlador.CtrlEmpleado;
+import controlador.CtrlUsuario;
 import java.awt.Color;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -157,7 +161,7 @@ public class Usuario extends javax.swing.JInternalFrame {
                 .addComponent(jBtnBuscarUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jBtnEliminarUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,13 +207,7 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         jTblListarUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo Inss", "Nombres", "Correo"
@@ -218,18 +216,27 @@ public class Usuario extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTblListarUsuario.setFocusable(false);
         jTblListarUsuario.setGridColor(new java.awt.Color(0, 0, 0));
         jTblListarUsuario.setRowHeight(25);
         jTblListarUsuario.setSelectionBackground(new java.awt.Color(0, 51, 102));
-        jTblListarUsuario.setShowHorizontalLines(true);
         jTblListarUsuario.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTblListarUsuario);
+        if (jTblListarUsuario.getColumnModel().getColumnCount() > 0) {
+            jTblListarUsuario.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 450, 360));
 
@@ -301,8 +308,8 @@ public class Usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTxtNombresUsuActionPerformed
 
     private void jTxtNombresUsuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombresUsuKeyTyped
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -327,14 +334,65 @@ public class Usuario extends javax.swing.JInternalFrame {
 
     private void jBtnGuardarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarUsuActionPerformed
 
+        try {
+            if (!validateForm()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String value = this.jTxtINSSUsu.getText();
+                negocio.emp em = CtrlEmpleado.leerRegistro(value);
+                //Si se obtuvo el registro, se muestra
+                if (em != null) {
+                    negocio.Usuario us = new negocio.Usuario();
+                    us.setIdEmp(em.getIdEmpleado());
+                    this.jTxtNombresUsu.setText(em.getNombre() + " " + em.getP_apellido() + " " + em.getS_apellido());
+
+                    // Preparar los datos que se guardaran de la Modalidad
+                    int ans = CtrlUsuario.insertar_usuario(
+                            this.jTxtCorreoUsu.getText(),
+                            this.jTxtContraseniaUsu.getText());
+
+                    // Validamos si se guardo el registro
+                    if (ans > 0) {
+                        JOptionPane.showMessageDialog(this, "Credencial grabada con exito",
+                                "Grabar Registro", JOptionPane.INFORMATION_MESSAGE);
+                        this.clearForm(); //Limpiar los campos del formulario
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido algun error "
+                                + "al \n registrar la credencial, revise los datos e intente nuevamente",
+                                "Registro de empleado no Encontrado", JOptionPane.ERROR_MESSAGE);
+                    }//Fin de la instrucción if
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al intentar guardar "
+                    + "el \n registro, no se encuentra una librería",
+                    "Librería no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla al "
+                    + "hacer referencia \n de una instancia",
+                    "Instancia no Encontrada", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha denegado el acceso al  "
+                    + "intentar utilizar \n la librería o instancia para guardar",
+                    "Acceso Ilegal a un Recurso", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha producido una falla con "
+                    + "el manejo de la solicitud \n al intentar registrar datos "
+                    + "\n" + ex.getMessage(),
+                    "Error al Procesar Datos", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error,
+                    "Registro/actualizacion fallido", JOptionPane.ERROR_MESSAGE);
+        }//Fin
     }//GEN-LAST:event_jBtnGuardarUsuActionPerformed
 
     private void jBtnEliminarUsuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarUsuMouseEntered
-        jBtnEliminarUsu.setBackground(new Color(255,0,0));
+        jBtnEliminarUsu.setBackground(new Color(255, 0, 0));
     }//GEN-LAST:event_jBtnEliminarUsuMouseEntered
 
     private void jBtnEliminarUsuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarUsuMouseExited
-        jBtnEliminarUsu.setBackground(new Color(204,204,204));
+        jBtnEliminarUsu.setBackground(new Color(204, 204, 204));
     }//GEN-LAST:event_jBtnEliminarUsuMouseExited
 
     private void jBtnEliminarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarUsuActionPerformed
@@ -347,8 +405,8 @@ public class Usuario extends javax.swing.JInternalFrame {
 
     private void jTxtCorreoUsuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtCorreoUsuKeyTyped
         // TODO add your handling code here:
-        char validar =  evt.getKeyChar();
-        if (Character.isDigit(validar)){
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -366,6 +424,28 @@ public class Usuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtContraseniaUsuKeyTyped
 
+    // Metodo para limpiar los campos del formulario
+    private void clearForm() {
+        this.jTxtINSSUsu.setText("");
+        this.jTxtNombresUsu.setText("");
+        this.jTxtCorreoUsu.setText("");
+        this.jTxtContraseniaUsu.setText("");
+    }// Fin
+
+    // Metodo para validar que los campos del formulario sean rellenados
+    private boolean validateForm() {
+        boolean t = true;
+
+        if (jTxtINSSUsu.getText().isBlank()
+                || jTxtCorreoUsu.getText().isBlank()
+                || jTxtContraseniaUsu.getText().isBlank()) {
+
+            // Si alguno de los campos esta vacio retorna falso
+            t = false;
+        }
+
+        return t;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscarUsu;
